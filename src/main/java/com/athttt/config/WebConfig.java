@@ -13,7 +13,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = "com.example.myapp.controllers")
+@ComponentScan(basePackages = "com.athttt.controllers")
 public class WebConfig implements WebMvcConfigurer {
     
     @Autowired
@@ -22,6 +22,14 @@ public class WebConfig implements WebMvcConfigurer {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/resources/**")
                 .addResourceLocations("/resources/");
+        registry.addResourceHandler("/css/**")
+				.addResourceLocations("/resources/css/");
+        registry.addResourceHandler("/js/**")
+		.addResourceLocations("/resources/js/");
+        registry.addResourceHandler("/img/**")
+		.addResourceLocations("/resources/img/");
+        registry.addResourceHandler("/fonts/**")
+		.addResourceLocations("/resources/fonts/");
     }
 
     public void configureViewResolvers(ViewResolverRegistry registry) {
