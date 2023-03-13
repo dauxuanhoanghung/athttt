@@ -31,7 +31,7 @@ import javax.validation.constraints.Size;
  * @author LENOVO
  */
 @Entity
-@Table(name = "product", catalog = "springbootweb", schema = "")
+@Table(name = "product")
 @NamedQueries({
     @NamedQuery(name = "Product.findAll", query = "SELECT p FROM Product p"),
     @NamedQuery(name = "Product.findById", query = "SELECT p FROM Product p WHERE p.id = :id"),
