@@ -25,36 +25,44 @@ import javax.validation.constraints.Size;
 
 /**
  *
- * @author Dinh Chuong
+ * @author LENOVO
  */
 @Entity
-@Table(catalog = "springbootweb", schema = "")
+@Table(name = "category", catalog = "springbootweb", schema = "")
 @NamedQueries({
-    @NamedQuery(name = "Category.findAll", query = "SELECT c FROM Category c")})
+    @NamedQuery(name = "Category.findAll", query = "SELECT c FROM Category c"),
+    @NamedQuery(name = "Category.findById", query = "SELECT c FROM Category c WHERE c.id = :id"),
+    @NamedQuery(name = "Category.findByName", query = "SELECT c FROM Category c WHERE c.name = :name"),
+    @NamedQuery(name = "Category.findByCreateddate", query = "SELECT c FROM Category c WHERE c.createddate = :createddate"),
+    @NamedQuery(name = "Category.findByCreatedby", query = "SELECT c FROM Category c WHERE c.createdby = :createdby"),
+    @NamedQuery(name = "Category.findByModifieddate", query = "SELECT c FROM Category c WHERE c.modifieddate = :modifieddate"),
+    @NamedQuery(name = "Category.findByModifiedby", query = "SELECT c FROM Category c WHERE c.modifiedby = :modifiedby")})
 public class Category implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(nullable = false)
+    @Column(name = "id")
     private Long id;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 200)
-    @Column(nullable = false, length = 200)
+    @Column(name = "name")
     private String name;
+    @Column(name = "createddate")
     @Temporal(TemporalType.TIMESTAMP)
     private Date createddate;
     @Size(max = 45)
-    @Column(length = 45)
+    @Column(name = "createdby")
     private String createdby;
+    @Column(name = "modifieddate")
     @Temporal(TemporalType.TIMESTAMP)
     private Date modifieddate;
     @Size(max = 45)
-    @Column(length = 45)
+    @Column(name = "modifiedby")
     private String modifiedby;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "category")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "categoryId")
     private List<Product> productList;
 
     public Category() {

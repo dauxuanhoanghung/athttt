@@ -13,7 +13,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -25,41 +24,44 @@ import javax.validation.constraints.Size;
 
 /**
  *
- * @author Dinh Chuong
+ * @author LENOVO
  */
 @Entity
-@Table(catalog = "springbootweb", schema = "")
+@Table(name = "saleorderdetails", catalog = "springbootweb", schema = "")
 @NamedQueries({
-    @NamedQuery(name = "Saleorderdetails.findAll", query = "SELECT s FROM Saleorderdetails s")})
+    @NamedQuery(name = "Saleorderdetails.findAll", query = "SELECT s FROM Saleorderdetails s"),
+    @NamedQuery(name = "Saleorderdetails.findById", query = "SELECT s FROM Saleorderdetails s WHERE s.id = :id"),
+    @NamedQuery(name = "Saleorderdetails.findByCode", query = "SELECT s FROM Saleorderdetails s WHERE s.code = :code"),
+    @NamedQuery(name = "Saleorderdetails.findByUnitprice", query = "SELECT s FROM Saleorderdetails s WHERE s.unitprice = :unitprice"),
+    @NamedQuery(name = "Saleorderdetails.findByUnitquantity", query = "SELECT s FROM Saleorderdetails s WHERE s.unitquantity = :unitquantity"),
+    @NamedQuery(name = "Saleorderdetails.findByCreatedDate", query = "SELECT s FROM Saleorderdetails s WHERE s.createdDate = :createdDate")})
 public class Saleorderdetails implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(nullable = false)
+    @Column(name = "id")
     private Long id;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 50)
-    @Column(nullable = false, length = 50)
+    @Column(name = "code")
     private String code;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(precision = 12, scale = 0)
+    @Column(name = "unitprice")
     private Float unitprice;
+    @Column(name = "unitquantity")
     private Integer unitquantity;
+    @Column(name = "createdDate")
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdDate;
-    @JoinColumns({
-        @JoinColumn(name = "product_id", referencedColumnName = "id", nullable = false),
-        @JoinColumn(name = "product_id", referencedColumnName = "id", nullable = false)})
+    @JoinColumn(name = "product_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private Product product;
-    @JoinColumns({
-        @JoinColumn(name = "order_id", referencedColumnName = "id", nullable = false),
-        @JoinColumn(name = "order_id", referencedColumnName = "id", nullable = false)})
+    private Product productId;
+    @JoinColumn(name = "order_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private Saleorder saleorder;
+    private Saleorder orderId;
 
     public Saleorderdetails() {
     }
@@ -113,20 +115,20 @@ public class Saleorderdetails implements Serializable {
         this.createdDate = createdDate;
     }
 
-    public Product getProduct() {
-        return product;
+    public Product getProductId() {
+        return productId;
     }
 
-    public void setProduct(Product product) {
-        this.product = product;
+    public void setProductId(Product productId) {
+        this.productId = productId;
     }
 
-    public Saleorder getSaleorder() {
-        return saleorder;
+    public Saleorder getOrderId() {
+        return orderId;
     }
 
-    public void setSaleorder(Saleorder saleorder) {
-        this.saleorder = saleorder;
+    public void setOrderId(Saleorder orderId) {
+        this.orderId = orderId;
     }
 
     @Override

@@ -9,6 +9,7 @@
     <class>com.athttt.entity.Users</class>
     <class>com.athttt.entity.Saleorderdetails</class>
     <class>com.athttt.entity.Category</class>
+    <class>com.athttt.entity.Comment</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/springbootweb?zeroDateTimeBehavior=CONVERT_TO_NULL"/>

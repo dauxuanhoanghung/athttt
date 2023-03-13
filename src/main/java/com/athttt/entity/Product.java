@@ -15,10 +15,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
-import javax.persistence.JoinTable;
 import javax.persistence.Lob;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -31,72 +28,75 @@ import javax.validation.constraints.Size;
 
 /**
  *
- * @author Dinh Chuong
+ * @author LENOVO
  */
 @Entity
-@Table(catalog = "springbootweb", schema = "")
+@Table(name = "product", catalog = "springbootweb", schema = "")
 @NamedQueries({
-    @NamedQuery(name = "Product.findAll", query = "SELECT p FROM Product p")})
+    @NamedQuery(name = "Product.findAll", query = "SELECT p FROM Product p"),
+    @NamedQuery(name = "Product.findById", query = "SELECT p FROM Product p WHERE p.id = :id"),
+    @NamedQuery(name = "Product.findByName", query = "SELECT p FROM Product p WHERE p.name = :name"),
+    @NamedQuery(name = "Product.findByStatus", query = "SELECT p FROM Product p WHERE p.status = :status"),
+    @NamedQuery(name = "Product.findByPrice", query = "SELECT p FROM Product p WHERE p.price = :price"),
+    @NamedQuery(name = "Product.findByQuantity", query = "SELECT p FROM Product p WHERE p.quantity = :quantity"),
+    @NamedQuery(name = "Product.findBySupplier", query = "SELECT p FROM Product p WHERE p.supplier = :supplier"),
+    @NamedQuery(name = "Product.findByCreateddate", query = "SELECT p FROM Product p WHERE p.createddate = :createddate"),
+    @NamedQuery(name = "Product.findByCreatedby", query = "SELECT p FROM Product p WHERE p.createdby = :createdby"),
+    @NamedQuery(name = "Product.findByModifieddate", query = "SELECT p FROM Product p WHERE p.modifieddate = :modifieddate"),
+    @NamedQuery(name = "Product.findByModifiedby", query = "SELECT p FROM Product p WHERE p.modifiedby = :modifiedby")})
 public class Product implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(nullable = false)
+    @Column(name = "id")
     private Long id;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 200)
-    @Column(nullable = false, length = 200)
+    @Column(name = "name")
     private String name;
     @Lob
     @Size(max = 65535)
-    @Column(length = 65535)
+    @Column(name = "description")
     private String description;
+    @Column(name = "status")
     private Boolean status;
     @Basic(optional = false)
     @NotNull
-    @Column(nullable = false)
+    @Column(name = "price")
     private float price;
+    @Column(name = "quantity")
     private Integer quantity;
     @Size(max = 200)
-    @Column(length = 200)
+    @Column(name = "supplier")
     private String supplier;
     @Lob
     @Size(max = 65535)
-    @Column(length = 65535)
+    @Column(name = "thumbnail")
     private String thumbnail;
+    @Column(name = "createddate")
     @Temporal(TemporalType.TIMESTAMP)
     private Date createddate;
     @Size(max = 45)
-    @Column(length = 45)
+    @Column(name = "createdby")
     private String createdby;
+    @Column(name = "modifieddate")
     @Temporal(TemporalType.TIMESTAMP)
     private Date modifieddate;
     @Size(max = 45)
-    @Column(length = 45)
+    @Column(name = "modifiedby")
     private String modifiedby;
-    @JoinTable(name = "comment", joinColumns = {
-        @JoinColumn(name = "product_id", referencedColumnName = "id", nullable = false),
-        @JoinColumn(name = "product_id", referencedColumnName = "id", nullable = false),
-        @JoinColumn(name = "product_id", referencedColumnName = "id", nullable = false)}, inverseJoinColumns = {
-        @JoinColumn(name = "user_id", referencedColumnName = "id"),
-        @JoinColumn(name = "user_id", referencedColumnName = "id"),
-        @JoinColumn(name = "user_id", referencedColumnName = "id")})
-    @ManyToMany
-    private List<Users> usersList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "product")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "productId")
     private List<Image> imageList;
-    @JoinColumns({
-        @JoinColumn(name = "category_id", referencedColumnName = "id", nullable = false),
-        @JoinColumn(name = "category_id", referencedColumnName = "id", nullable = false),
-        @JoinColumn(name = "category_id", referencedColumnName = "id", nullable = false),
-        @JoinColumn(name = "category_id", referencedColumnName = "id", nullable = false)})
+    @JoinColumn(name = "category_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private Category category;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "product")
+    private Category categoryId;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "productId")
     private List<Saleorderdetails> saleorderdetailsList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "productId")
+    private List<Comment> commentList;
 
     public Product() {
     }
@@ -207,14 +207,6 @@ public class Product implements Serializable {
         this.modifiedby = modifiedby;
     }
 
-    public List<Users> getUsersList() {
-        return usersList;
-    }
-
-    public void setUsersList(List<Users> usersList) {
-        this.usersList = usersList;
-    }
-
     public List<Image> getImageList() {
         return imageList;
     }
@@ -223,12 +215,12 @@ public class Product implements Serializable {
         this.imageList = imageList;
     }
 
-    public Category getCategory() {
-        return category;
+    public Category getCategoryId() {
+        return categoryId;
     }
 
-    public void setCategory(Category category) {
-        this.category = category;
+    public void setCategoryId(Category categoryId) {
+        this.categoryId = categoryId;
     }
 
     public List<Saleorderdetails> getSaleorderdetailsList() {
@@ -237,6 +229,14 @@ public class Product implements Serializable {
 
     public void setSaleorderdetailsList(List<Saleorderdetails> saleorderdetailsList) {
         this.saleorderdetailsList = saleorderdetailsList;
+    }
+
+    public List<Comment> getCommentList() {
+        return commentList;
+    }
+
+    public void setCommentList(List<Comment> commentList) {
+        this.commentList = commentList;
     }
 
     @Override

@@ -13,13 +13,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 /**
@@ -27,12 +27,13 @@ import javax.validation.constraints.Size;
  * @author LENOVO
  */
 @Entity
-@Table(name = "image", catalog = "springbootweb", schema = "")
+@Table(name = "comment", catalog = "springbootweb", schema = "")
 @NamedQueries({
-    @NamedQuery(name = "Image.findAll", query = "SELECT i FROM Image i"),
-    @NamedQuery(name = "Image.findById", query = "SELECT i FROM Image i WHERE i.id = :id"),
-    @NamedQuery(name = "Image.findByCreatedDate", query = "SELECT i FROM Image i WHERE i.createdDate = :createdDate")})
-public class Image implements Serializable {
+    @NamedQuery(name = "Comment.findAll", query = "SELECT c FROM Comment c"),
+    @NamedQuery(name = "Comment.findById", query = "SELECT c FROM Comment c WHERE c.id = :id"),
+    @NamedQuery(name = "Comment.findByContent", query = "SELECT c FROM Comment c WHERE c.content = :content"),
+    @NamedQuery(name = "Comment.findByCreatedDate", query = "SELECT c FROM Comment c WHERE c.createdDate = :createdDate")})
+public class Comment implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -40,22 +41,31 @@ public class Image implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Long id;
-    @Lob
-    @Size(max = 65535)
-    @Column(name = "url")
-    private String url;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 200)
+    @Column(name = "content")
+    private String content;
     @Column(name = "createdDate")
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdDate;
     @JoinColumn(name = "product_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Product productId;
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @ManyToOne
+    private Users userId;
 
-    public Image() {
+    public Comment() {
     }
 
-    public Image(Long id) {
+    public Comment(Long id) {
         this.id = id;
+    }
+
+    public Comment(Long id, String content) {
+        this.id = id;
+        this.content = content;
     }
 
     public Long getId() {
@@ -66,12 +76,12 @@ public class Image implements Serializable {
         this.id = id;
     }
 
-    public String getUrl() {
-        return url;
+    public String getContent() {
+        return content;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+    public void setContent(String content) {
+        this.content = content;
     }
 
     public Date getCreatedDate() {
@@ -90,6 +100,14 @@ public class Image implements Serializable {
         this.productId = productId;
     }
 
+    public Users getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Users userId) {
+        this.userId = userId;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -100,10 +118,10 @@ public class Image implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Image)) {
+        if (!(object instanceof Comment)) {
             return false;
         }
-        Image other = (Image) object;
+        Comment other = (Comment) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -112,7 +130,7 @@ public class Image implements Serializable {
 
     @Override
     public String toString() {
-        return "com.athttt.entity.Image[ id=" + id + " ]";
+        return "com.athttt.entity.Comment[ id=" + id + " ]";
     }
     
 }

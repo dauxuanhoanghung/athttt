@@ -27,31 +27,36 @@ import javax.validation.constraints.Size;
 
 /**
  *
- * @author Dinh Chuong
+ * @author LENOVO
  */
 @Entity
-@Table(catalog = "springbootweb", schema = "")
+@Table(name = "saleorder", catalog = "springbootweb", schema = "")
 @NamedQueries({
-    @NamedQuery(name = "Saleorder.findAll", query = "SELECT s FROM Saleorder s")})
+    @NamedQuery(name = "Saleorder.findAll", query = "SELECT s FROM Saleorder s"),
+    @NamedQuery(name = "Saleorder.findById", query = "SELECT s FROM Saleorder s WHERE s.id = :id"),
+    @NamedQuery(name = "Saleorder.findByCode", query = "SELECT s FROM Saleorder s WHERE s.code = :code"),
+    @NamedQuery(name = "Saleorder.findBySubtotal", query = "SELECT s FROM Saleorder s WHERE s.subtotal = :subtotal"),
+    @NamedQuery(name = "Saleorder.findByCreatedDate", query = "SELECT s FROM Saleorder s WHERE s.createdDate = :createdDate")})
 public class Saleorder implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(nullable = false)
+    @Column(name = "id")
     private Long id;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 50)
-    @Column(nullable = false, length = 50)
+    @Column(name = "code")
     private String code;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(precision = 12, scale = 0)
+    @Column(name = "subtotal")
     private Float subtotal;
+    @Column(name = "createdDate")
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdDate;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "saleorder")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "orderId")
     private List<Saleorderdetails> saleorderdetailsList;
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     @ManyToOne

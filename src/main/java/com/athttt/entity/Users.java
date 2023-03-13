@@ -20,65 +20,74 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 /**
  *
- * @author Dinh Chuong
+ * @author LENOVO
  */
 @Entity
-@Table(catalog = "springbootweb", schema = "", uniqueConstraints = {
-    @UniqueConstraint(columnNames = {"email"}),
-    @UniqueConstraint(columnNames = {"username"})})
+@Table(name = "users", catalog = "springbootweb", schema = "")
 @NamedQueries({
-    @NamedQuery(name = "Users.findAll", query = "SELECT u FROM Users u")})
+    @NamedQuery(name = "Users.findAll", query = "SELECT u FROM Users u"),
+    @NamedQuery(name = "Users.findById", query = "SELECT u FROM Users u WHERE u.id = :id"),
+    @NamedQuery(name = "Users.findByCreatedby", query = "SELECT u FROM Users u WHERE u.createdby = :createdby"),
+    @NamedQuery(name = "Users.findByCreateddate", query = "SELECT u FROM Users u WHERE u.createddate = :createddate"),
+    @NamedQuery(name = "Users.findByModifiedby", query = "SELECT u FROM Users u WHERE u.modifiedby = :modifiedby"),
+    @NamedQuery(name = "Users.findByModifieddate", query = "SELECT u FROM Users u WHERE u.modifieddate = :modifieddate"),
+    @NamedQuery(name = "Users.findByEmail", query = "SELECT u FROM Users u WHERE u.email = :email"),
+    @NamedQuery(name = "Users.findByFullname", query = "SELECT u FROM Users u WHERE u.fullname = :fullname"),
+    @NamedQuery(name = "Users.findByPassword", query = "SELECT u FROM Users u WHERE u.password = :password"),
+    @NamedQuery(name = "Users.findByStatus", query = "SELECT u FROM Users u WHERE u.status = :status"),
+    @NamedQuery(name = "Users.findByUsername", query = "SELECT u FROM Users u WHERE u.username = :username")})
 public class Users implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(nullable = false)
+    @Column(name = "id")
     private Long id;
     @Size(max = 255)
-    @Column(length = 255)
+    @Column(name = "createdby")
     private String createdby;
+    @Column(name = "createddate")
     @Temporal(TemporalType.TIMESTAMP)
     private Date createddate;
     @Size(max = 255)
-    @Column(length = 255)
+    @Column(name = "modifiedby")
     private String modifiedby;
+    @Column(name = "modifieddate")
     @Temporal(TemporalType.TIMESTAMP)
     private Date modifieddate;
     // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
     @Size(max = 255)
-    @Column(length = 255)
+    @Column(name = "email")
     private String email;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 255)
-    @Column(nullable = false, length = 255)
+    @Column(name = "fullname")
     private String fullname;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 255)
-    @Column(nullable = false, length = 255)
+    @Column(name = "password")
     private String password;
     @Basic(optional = false)
     @NotNull
-    @Column(nullable = false)
+    @Column(name = "status")
     private int status;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 255)
-    @Column(nullable = false, length = 255)
+    @Column(name = "username")
     private String username;
     @ManyToMany(mappedBy = "usersList")
     private List<Role> roleList;
-    @ManyToMany(mappedBy = "usersList")
-    private List<Product> productList;
+    @OneToMany(mappedBy = "userId")
+    private List<Comment> commentList;
     @OneToMany(mappedBy = "userId")
     private List<Saleorder> saleorderList;
 
@@ -185,12 +194,12 @@ public class Users implements Serializable {
         this.roleList = roleList;
     }
 
-    public List<Product> getProductList() {
-        return productList;
+    public List<Comment> getCommentList() {
+        return commentList;
     }
 
-    public void setProductList(List<Product> productList) {
-        this.productList = productList;
+    public void setCommentList(List<Comment> commentList) {
+        this.commentList = commentList;
     }
 
     public List<Saleorder> getSaleorderList() {
