@@ -63,7 +63,9 @@
         </div>
     </div>
     <!-- Offcanvas Menu End -->
-
+	<c:forEach items="products" var = "p">
+		<h1>${p.name}</h1>
+	</c:forEach>
     <!-- Header Section Begin -->
     <header class="header">
         <div class="header__top">
