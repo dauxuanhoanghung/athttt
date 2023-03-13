@@ -1,5 +1,38 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<!-- Page Preloder -->
+<div id="preloder">
+	<div class="loader"></div>
+</div>
+
+<!-- Offcanvas Menu Begin -->
+<div class="offcanvas-menu-overlay"></div>
+<div class="offcanvas-menu-wrapper">
+	<div class="offcanvas__option">
+		<div class="offcanvas__links">
+			<a href="#">Sign in</a> <a href="#">FAQs</a>
+		</div>
+		<div class="offcanvas__top__hover">
+			<span>Usd <i class="arrow_carrot-down"></i></span>
+			<ul>
+				<li>USD</li>
+				<li>EUR</li>
+				<li>USD</li>
+			</ul>
+		</div>
+	</div>
+	<div class="offcanvas__nav__option">
+		<a href="#" class="search-switch"><img src="img/icon/search.png"
+			alt=""></a> <a href="#"><img src="img/icon/heart.png" alt=""></a>
+		<a href="#"><img src="img/icon/cart.png" alt=""> <span>0</span></a>
+
+	</div>
+	<div id="mobile-menu-wrap"></div>
+	<div class="offcanvas__text">
+		<p>Free shipping, 30-day return or refund guarantee.</p>
+	</div>
+</div>
+<!-- Offcanvas Menu End -->
 <header class="header">
 	<div class="header__top">
 		<div class="container">
@@ -38,12 +71,12 @@
 				<nav class="header__menu mobile-menu">
 					<ul>
 						<li><a href="./">Home</a></li>
-						<li class="active"><a href="./shop">Shop</a></li>
+						<li ><a href="./shop">Shop</a></li>
 						<li><a href="#">Pages</a>
 							<ul class="dropdown">
 								<li><a href="./about.html">About Us</a></li>
-								<li><a href="./shop-details.html">Shop Details</a></li>
-								<li><a href="./shopping-cart.html">Shopping Cart</a></li>
+								<li><a href="./shop-details">Shop Details</a></li>
+								<li><a href="./my-cart">Shopping Cart</a></li>
 								<li><a href="./checkout.html">Check Out</a></li>
 								<li><a href="./blog-details.html">Blog Details</a></li>
 							</ul></li>
