@@ -49,7 +49,7 @@
 			<a href="#" class="search-switch"><img src="img/icon/search.png"
 				alt=""></a> <a href="#"><img src="img/icon/heart.png" alt=""></a>
 			<a href="#"><img src="img/icon/cart.png" alt=""> <span>0</span></a>
-			<div class="price">$0.00</div>
+			
 		</div>
 		<div id="mobile-menu-wrap"></div>
 		<div class="offcanvas__text">
@@ -59,6 +59,7 @@
 	<!-- Offcanvas Menu End -->
 
 	<!-- Header Section Begin -->
+
 	<c:import url="/WEB-INF/views/layout/header.jsp" />
 	<!-- Header Section End -->
 
@@ -316,4 +317,30 @@
 	<!-- Js Plugins -->
 	<c:import url="/WEB-INF/views/layout/js.jsp" />
 
+	<script>
+        const cart = {
+
+            addToCart(id,name, price, thumbnail ) {
+                let listItem = JSON.parse(localStorage.getItem("listItem")) || []
+                const totalQuantity = listItem.reduce((accumulator, currentValue) => {
+                    return accumulator + currentValue.quantity;
+                }, 0);
+
+                if (listItem.filter(item => item.product.id == id).length == 0){
+                    listItem.push({product: {id, name, price, thumbnail} , quantity: 1})
+                }
+                else
+                {
+                    listItem.forEach(item => {
+                        if (item.product.id == id) {
+                            item.quantity+=1;
+                        }
+                    })
+                }
+
+                const numberDOM = document.querySelector(".header__nav__option .number").innerHTML = totalQuantity + 1;
+                localStorage.setItem("listItem", JSON.stringify(listItem));
+            }
+        }
+    </script>
 </body>
