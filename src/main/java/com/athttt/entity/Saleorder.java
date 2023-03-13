@@ -30,13 +30,14 @@ import javax.validation.constraints.Size;
  * @author LENOVO
  */
 @Entity
-@Table(name = "saleorder", catalog = "springbootweb", schema = "")
+@Table(name = "saleorder")
 @NamedQueries({
     @NamedQuery(name = "Saleorder.findAll", query = "SELECT s FROM Saleorder s"),
     @NamedQuery(name = "Saleorder.findById", query = "SELECT s FROM Saleorder s WHERE s.id = :id"),
     @NamedQuery(name = "Saleorder.findByCode", query = "SELECT s FROM Saleorder s WHERE s.code = :code"),
     @NamedQuery(name = "Saleorder.findBySubtotal", query = "SELECT s FROM Saleorder s WHERE s.subtotal = :subtotal"),
-    @NamedQuery(name = "Saleorder.findByCreatedDate", query = "SELECT s FROM Saleorder s WHERE s.createdDate = :createdDate")})
+    @NamedQuery(name = "Saleorder.findByCreatedDate", query = "SELECT s FROM Saleorder s WHERE s.createdDate = :createdDate"),
+   })
 public class Saleorder implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -56,6 +57,7 @@ public class Saleorder implements Serializable {
     @Column(name = "createdDate")
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdDate;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "orderId")
     private List<Saleorderdetails> saleorderdetailsList;
     @JoinColumn(name = "user_id", referencedColumnName = "id")
@@ -105,6 +107,7 @@ public class Saleorder implements Serializable {
     public void setCreatedDate(Date createdDate) {
         this.createdDate = createdDate;
     }
+
 
     public List<Saleorderdetails> getSaleorderdetailsList() {
         return saleorderdetailsList;
