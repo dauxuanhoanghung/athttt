@@ -13,7 +13,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -28,7 +27,7 @@ import javax.validation.constraints.Size;
  * @author LENOVO
  */
 @Entity
-@Table(name = "users", catalog = "springbootweb", schema = "")
+@Table(name = "users")
 @NamedQueries({
     @NamedQuery(name = "Users.findAll", query = "SELECT u FROM Users u"),
     @NamedQuery(name = "Users.findById", query = "SELECT u FROM Users u WHERE u.id = :id"),
@@ -40,7 +39,8 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "Users.findByFullname", query = "SELECT u FROM Users u WHERE u.fullname = :fullname"),
     @NamedQuery(name = "Users.findByPassword", query = "SELECT u FROM Users u WHERE u.password = :password"),
     @NamedQuery(name = "Users.findByStatus", query = "SELECT u FROM Users u WHERE u.status = :status"),
-    @NamedQuery(name = "Users.findByUsername", query = "SELECT u FROM Users u WHERE u.username = :username")})
+    @NamedQuery(name = "Users.findByUsername", query = "SELECT u FROM Users u WHERE u.username = :username"),
+    @NamedQuery(name = "Users.findByRole", query = "SELECT u FROM Users u WHERE u.role = :role")})
 public class Users implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -84,8 +84,9 @@ public class Users implements Serializable {
     @Size(min = 1, max = 255)
     @Column(name = "username")
     private String username;
-    @ManyToMany(mappedBy = "usersList")
-    private List<Role> roleList;
+    @Size(max = 10)
+    @Column(name = "role")
+    private String role;
     @OneToMany(mappedBy = "userId")
     private List<Comment> commentList;
     @OneToMany(mappedBy = "userId")
@@ -186,12 +187,12 @@ public class Users implements Serializable {
         this.username = username;
     }
 
-    public List<Role> getRoleList() {
-        return roleList;
+    public String getRole() {
+        return role;
     }
 
-    public void setRoleList(List<Role> roleList) {
-        this.roleList = roleList;
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public List<Comment> getCommentList() {

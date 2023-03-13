@@ -27,14 +27,15 @@ import javax.validation.constraints.Size;
  * @author LENOVO
  */
 @Entity
-@Table(name = "saleorderdetails", catalog = "springbootweb", schema = "")
+@Table(name = "saleorderdetails")
 @NamedQueries({
     @NamedQuery(name = "Saleorderdetails.findAll", query = "SELECT s FROM Saleorderdetails s"),
     @NamedQuery(name = "Saleorderdetails.findById", query = "SELECT s FROM Saleorderdetails s WHERE s.id = :id"),
     @NamedQuery(name = "Saleorderdetails.findByCode", query = "SELECT s FROM Saleorderdetails s WHERE s.code = :code"),
     @NamedQuery(name = "Saleorderdetails.findByUnitprice", query = "SELECT s FROM Saleorderdetails s WHERE s.unitprice = :unitprice"),
     @NamedQuery(name = "Saleorderdetails.findByUnitquantity", query = "SELECT s FROM Saleorderdetails s WHERE s.unitquantity = :unitquantity"),
-    @NamedQuery(name = "Saleorderdetails.findByCreatedDate", query = "SELECT s FROM Saleorderdetails s WHERE s.createdDate = :createdDate")})
+    @NamedQuery(name = "Saleorderdetails.findByCreatedDate", query = "SELECT s FROM Saleorderdetails s WHERE s.createdDate = :createdDate"),
+    })
 public class Saleorderdetails implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -114,6 +115,8 @@ public class Saleorderdetails implements Serializable {
     public void setCreatedDate(Date createdDate) {
         this.createdDate = createdDate;
     }
+
+    
 
     public Product getProductId() {
         return productId;
