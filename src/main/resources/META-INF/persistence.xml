@@ -3,7 +3,6 @@
   <persistence-unit name="com.athttt_com.athttt_war_0.0.1PU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>com.athttt.entity.Product</class>
-    <class>com.athttt.entity.Role</class>
     <class>com.athttt.entity.Image</class>
     <class>com.athttt.entity.Saleorder</class>
     <class>com.athttt.entity.Users</class>
