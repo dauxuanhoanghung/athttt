@@ -1,12 +1,13 @@
 package com.athttt.controllers;
 
-import java.util.stream.Collectors;
 import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.athttt.entity.Product;
 import com.athttt.service.ProductService;
@@ -17,12 +18,19 @@ public class ShopController {
 	ProductService productService;
 
 	@RequestMapping("/shop")
-	public String index(Model model ) {
+	public String index(Model model , @RequestParam Map<String, Object> searchMap ,
+            @RequestParam(value = "page", defaultValue = "1", required = false) String page,
+            @RequestParam(value = "id", required = false) String id) {
 		
-		List<Product> listProduct = productService.getAllProduct();
-
+		
+		Long pages = (long) Math.ceil(productService.count()/9.0);
+		if (Long.parseLong(page) > pages) {
+            page = "1";
+        }
+		List<Product> listProduct = productService.getProducts(searchMap, Integer.valueOf(page));
+		model.addAttribute("totalPage", pages);
 		model.addAttribute("products", listProduct);
-
+		
 		return "shop";
 	}
 
