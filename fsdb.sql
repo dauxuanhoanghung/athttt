@@ -1,8 +1,8 @@
-CREATE DATABASE  IF NOT EXISTS `springbootweb` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+CREATE DATABASE  IF NOT EXISTS `springbootweb` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `springbootweb`;
 -- MySQL dump 10.13  Distrib 8.0.28, for Win64 (x86_64)
 --
--- Host: localhost    Database: springbootweb
+-- Host: 127.0.0.1    Database: springbootweb
 -- ------------------------------------------------------
 -- Server version	8.0.28
 
@@ -58,6 +58,7 @@ CREATE TABLE `comment` (
   `product_id` bigint NOT NULL,
   `user_id` bigint DEFAULT NULL,
   `createdDate` datetime DEFAULT CURRENT_TIMESTAMP,
+  `created_date` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `product_id` (`product_id`),
   KEY `user_id` (`user_id`),
@@ -87,6 +88,7 @@ CREATE TABLE `image` (
   `url` text,
   `product_id` bigint NOT NULL,
   `createdDate` datetime DEFAULT CURRENT_TIMESTAMP,
+  `created_date` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `product_id` (`product_id`),
   CONSTRAINT `image_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`)
@@ -140,36 +142,6 @@ INSERT INTO `product` VALUES (2,'Đồng hồ CSX20','Apple Watch SE 2022 44mm \
 UNLOCK TABLES;
 
 --
--- Table structure for table `role`
---
-
-DROP TABLE IF EXISTS `role`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `role` (
-  `id` bigint NOT NULL AUTO_INCREMENT,
-  `createdby` varchar(255) DEFAULT NULL,
-  `createddate` datetime DEFAULT NULL,
-  `modifiedby` varchar(255) DEFAULT NULL,
-  `modifieddate` datetime DEFAULT NULL,
-  `code` varchar(255) NOT NULL,
-  `name` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `UK_c36say97xydpmgigg38qv5l2p` (`code`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `role`
---
-
-LOCK TABLES `role` WRITE;
-/*!40000 ALTER TABLE `role` DISABLE KEYS */;
-INSERT INTO `role` VALUES (1,NULL,NULL,NULL,NULL,'ADMIN','Quản trị hệ thống'),(2,NULL,NULL,NULL,NULL,'USER','người dùng');
-/*!40000 ALTER TABLE `role` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `saleorder`
 --
 
@@ -182,6 +154,7 @@ CREATE TABLE `saleorder` (
   `subtotal` float DEFAULT '0',
   `user_id` bigint DEFAULT NULL,
   `createdDate` datetime DEFAULT CURRENT_TIMESTAMP,
+  `created_date` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   CONSTRAINT `saleorder_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
@@ -212,6 +185,7 @@ CREATE TABLE `saleorderdetails` (
   `order_id` bigint NOT NULL,
   `product_id` bigint NOT NULL,
   `createdDate` datetime DEFAULT CURRENT_TIMESTAMP,
+  `created_date` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `order_id` (`order_id`),
   KEY `product_id` (`product_id`),
@@ -227,33 +201,6 @@ CREATE TABLE `saleorderdetails` (
 LOCK TABLES `saleorderdetails` WRITE;
 /*!40000 ALTER TABLE `saleorderdetails` DISABLE KEYS */;
 /*!40000 ALTER TABLE `saleorderdetails` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `user_role`
---
-
-DROP TABLE IF EXISTS `user_role`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `user_role` (
-  `user_id` bigint NOT NULL,
-  `role_id` bigint NOT NULL,
-  KEY `FKa68196081fvovjhkek5m97n3y` (`role_id`),
-  KEY `FKj345gk1bovqvfame88rcx7yyx` (`user_id`),
-  CONSTRAINT `FKa68196081fvovjhkek5m97n3y` FOREIGN KEY (`role_id`) REFERENCES `role` (`id`),
-  CONSTRAINT `FKj345gk1bovqvfame88rcx7yyx` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `user_role`
---
-
-LOCK TABLES `user_role` WRITE;
-/*!40000 ALTER TABLE `user_role` DISABLE KEYS */;
-INSERT INTO `user_role` VALUES (1,1),(2,2);
-/*!40000 ALTER TABLE `user_role` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -274,6 +221,7 @@ CREATE TABLE `users` (
   `password` varchar(255) NOT NULL,
   `status` int NOT NULL,
   `username` varchar(255) NOT NULL,
+  `role` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UK_r43af9ap4edm43mmtq01oddj6` (`username`),
   UNIQUE KEY `UK_6dotkott2kjsp8vw4d0m25fb7` (`email`)
@@ -286,7 +234,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,NULL,NULL,NULL,NULL,NULL,'admin','$2a$10$/RUbuT9KIqk6f8enaTQiLOXzhnUkiwEJRdtzdrMXXwU7dgnLKTCYG',1,'admin'),(2,NULL,NULL,'admin','2023-02-24 19:03:50',NULL,'nguyen van a','$2a$10$luzLXQRXH3rfHejevyzI.eLqH58DnZ2LoCj3B6XBrQt4NIP0GHmnq',1,'nguyenvana');
+INSERT INTO `users` VALUES (1,NULL,NULL,NULL,NULL,NULL,'admin','$2a$10$/RUbuT9KIqk6f8enaTQiLOXzhnUkiwEJRdtzdrMXXwU7dgnLKTCYG',1,'admin','ADMIN'),(2,NULL,NULL,'admin','2023-02-24 19:03:50',NULL,'nguyen van a','$2a$10$luzLXQRXH3rfHejevyzI.eLqH58DnZ2LoCj3B6XBrQt4NIP0GHmnq',1,'nguyenvana','USER');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -299,4 +247,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-03-08 19:29:37
+-- Dump completed on 2023-03-13 14:33:57
