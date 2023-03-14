@@ -57,6 +57,9 @@ public class Product implements Serializable {
     @Size(min = 1, max = 200)
     @Column(name = "name")
     private String name;
+    
+
+    
     @Lob
     @Size(max = 65535)
     @Column(name = "description")
@@ -134,8 +137,9 @@ public class Product implements Serializable {
     public void setDescription(String description) {
         this.description = description;
     }
-
-    public Boolean getStatus() {
+    
+    
+	public Boolean getStatus() {
         return status;
     }
 

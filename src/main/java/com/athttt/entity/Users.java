@@ -70,6 +70,13 @@ public class Users implements Serializable {
     @Size(min = 1, max = 255)
     @Column(name = "fullname")
     private String fullname;
+
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 20)
+    @Column(name = "account_number")
+    private String account_number;
+    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 255)
@@ -106,6 +113,13 @@ public class Users implements Serializable {
         this.status = status;
         this.username = username;
     }
+    public String getAccount_number() {
+		return account_number;
+	}
+
+	public void setAccount_number(String account_number) {
+		this.account_number = account_number;
+	}
 
     public Long getId() {
         return id;
