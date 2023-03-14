@@ -1,10 +1,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 
-<%@ page language="java" contentType="UTF-8" pageEncoding="UTF-8"%>
 
 
 <!DOCTYPE html>
-<html lang="zxx">
+<html>
 
 <head>
 <meta charset="UTF-8">
@@ -24,7 +25,7 @@
 </head>
 
 <body>
-	
+
 	<!-- Header Section Begin -->
 
 	<c:import url="/WEB-INF/views/layout/header.jsp" />
@@ -233,14 +234,10 @@
 									</div>
 									<div class="product__item__text">
 										<h6>${p.name}</h6>
-										<%--                                      <security:authorize access = "isAnonymous()">--%>
-										<%--                                          <a style="cursor: pointer"  href="/login" class="add-cart">+ Add To Cart</a>--%>
-										<%--                                      </security:authorize>--%>
-										<%--                                      <security:authorize access = "isAuthenticated()">--%>
+
 										<a style="cursor: pointer" class="add-cart"
 											onclick="cart.addToCart(${p.id}, '${p.name}', ${p.price}, '${p.thumbnail}')">
 											+ Add To Cart </a>
-										<%--                                      </security:authorize>--%>
 										<div class="rating">
 											<i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i
 												class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i
