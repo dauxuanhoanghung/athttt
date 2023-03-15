@@ -9,10 +9,12 @@ public class HomeController {
 	public String index() {
 		return "index";
 	}
+
 	@RequestMapping("/welcome")
 	public String wel() {
 		return "welcome";
 	}
 
-}
+
 	
+}
