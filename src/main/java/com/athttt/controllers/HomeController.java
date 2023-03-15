@@ -13,5 +13,6 @@ public class HomeController {
 	public String wel() {
 		return "welcome";
 	}
+
 }
 	
