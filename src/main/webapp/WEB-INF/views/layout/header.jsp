@@ -1,3 +1,6 @@
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!-- Page Preloder -->
@@ -10,7 +13,7 @@
 <div class="offcanvas-menu-wrapper">
 	<div class="offcanvas__option">
 		<div class="offcanvas__links">
-			<a href="#">Sign in</a> <a href="#">FAQs</a>
+			<a href="/login">Sign in</a> <a href="#">FAQs</a>
 		</div>
 		<div class="offcanvas__top__hover">
 			<span>Usd <i class="arrow_carrot-down"></i></span>
@@ -45,7 +48,14 @@
 				<div class="col-lg-6 col-md-5">
 					<div class="header__top__right">
 						<div class="header__top__links">
-							<a href="#">Sign in</a> <a href="#">FAQs</a>
+							<sec:authorize access="!isAuthenticated()">
+								<a href="/login">Sign in</a>
+							</sec:authorize>
+							<sec:authorize access="isAuthenticated()">
+								<a>ABC</a>
+								<a href="/logout">LOGOUT</a>
+							</sec:authorize>
+							<a href="#">FAQs</a>
 						</div>
 						<div class="header__top__hover">
 							<span>Usd <i class="arrow_carrot-down"></i></span>
@@ -71,7 +81,7 @@
 				<nav class="header__menu mobile-menu">
 					<ul>
 						<li><a href="./">Home</a></li>
-						<li ><a href="./shop">Shop</a></li>
+						<li><a href="./shop">Shop</a></li>
 						<li><a href="#">Pages</a>
 							<ul class="dropdown">
 								<li><a href="./about.html">About Us</a></li>

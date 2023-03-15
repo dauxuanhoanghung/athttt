@@ -43,7 +43,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.formLogin()
 				.loginPage("/login")
 				.passwordParameter("password").usernameParameter("username")
-//				.loginProcessingUrl("/authenticate").defaultSuccessUrl("/").failureUrl("/login?error=true").permitAll()
+				.loginProcessingUrl("/authenticate").defaultSuccessUrl("/").failureUrl("/login?error=true").permitAll()
 				.and().logout().logoutUrl("/logout").logoutSuccessUrl("/login?logout=true").invalidateHttpSession(true)
 				.deleteCookies("JSESSIONID");
 		http.csrf().disable();

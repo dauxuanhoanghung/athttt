@@ -22,21 +22,24 @@
 				<div class="form-wrapper align-items-center">
 				
 				
-					<form class="form sign-up">
+					<form class="form sign-up" action="/register" method="post">
 						<div class="input-group">
-							<i class='bx bxs-user'></i> <input type="text" placeholder="Username">
+							<i class='bx bxs-user'></i> 
+							<input type="text" placeholder="Username" name="username">
 						</div>
 						<div class="input-group">
-							<i class='bx bx-mail-send'></i> <input type="email" placeholder="Email">
+							<i class='bx bx-mail-send'></i> 
+							<input type="email" placeholder="Email" name="email">
 						</div>
 						<div class="input-group">
-							<i class='bx bxs-lock-alt'></i> <input type="password" placeholder="Password">
+							<i class='bx bxs-lock-alt'></i> 
+							<input type="password" placeholder="Password" name="password">
 						</div>
 						<div class="input-group">
-							<i class='bx bxs-lock-alt'></i> <input type="password"
-								placeholder="Confirm password">
+							<i class='bx bxs-lock-alt'></i> 
+							<input type="password" placeholder="Confirm password" name="confirm">
 						</div>
-						<button>Sign up</button>
+						<button type="submit">Sign up</button>
 						<p>
 							<span> Already have an account? </span> <b onclick="toggle()"
 								class="pointer"> Sign in here </b>

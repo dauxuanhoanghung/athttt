@@ -23,7 +23,9 @@
   <body>
 
     <!-- Header Section Begin -->
-    <c:import url="/WEB-INF/views/layout/header.jsp" />
+    <jsp:include page="/WEB-INF/views/layout/header.jsp">
+    <jsp:param value="${name}" name="name"/>
+    </jsp:include>
     <!-- Header Section End -->
 
     <!-- Hero Section Begin -->
