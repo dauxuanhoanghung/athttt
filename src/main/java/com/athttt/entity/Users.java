@@ -28,92 +28,104 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @Table(name = "users")
-@NamedQueries({
-    @NamedQuery(name = "Users.findAll", query = "SELECT u FROM Users u"),
-    @NamedQuery(name = "Users.findById", query = "SELECT u FROM Users u WHERE u.id = :id"),
-    @NamedQuery(name = "Users.findByCreatedby", query = "SELECT u FROM Users u WHERE u.createdby = :createdby"),
-    @NamedQuery(name = "Users.findByCreateddate", query = "SELECT u FROM Users u WHERE u.createddate = :createddate"),
-    @NamedQuery(name = "Users.findByModifiedby", query = "SELECT u FROM Users u WHERE u.modifiedby = :modifiedby"),
-    @NamedQuery(name = "Users.findByModifieddate", query = "SELECT u FROM Users u WHERE u.modifieddate = :modifieddate"),
-    @NamedQuery(name = "Users.findByEmail", query = "SELECT u FROM Users u WHERE u.email = :email"),
-    @NamedQuery(name = "Users.findByFullname", query = "SELECT u FROM Users u WHERE u.fullname = :fullname"),
-    @NamedQuery(name = "Users.findByPassword", query = "SELECT u FROM Users u WHERE u.password = :password"),
-    @NamedQuery(name = "Users.findByStatus", query = "SELECT u FROM Users u WHERE u.status = :status"),
-    @NamedQuery(name = "Users.findByUsername", query = "SELECT u FROM Users u WHERE u.username = :username"),
-    @NamedQuery(name = "Users.findByRole", query = "SELECT u FROM Users u WHERE u.role = :role")})
+@NamedQueries({ @NamedQuery(name = "Users.findAll", query = "SELECT u FROM Users u"),
+		@NamedQuery(name = "Users.findById", query = "SELECT u FROM Users u WHERE u.id = :id"),
+		@NamedQuery(name = "Users.findByCreatedby", query = "SELECT u FROM Users u WHERE u.createdby = :createdby"),
+		@NamedQuery(name = "Users.findByCreateddate", query = "SELECT u FROM Users u WHERE u.createddate = :createddate"),
+		@NamedQuery(name = "Users.findByModifiedby", query = "SELECT u FROM Users u WHERE u.modifiedby = :modifiedby"),
+		@NamedQuery(name = "Users.findByModifieddate", query = "SELECT u FROM Users u WHERE u.modifieddate = :modifieddate"),
+		@NamedQuery(name = "Users.findByEmail", query = "SELECT u FROM Users u WHERE u.email = :email"),
+		@NamedQuery(name = "Users.findByFullname", query = "SELECT u FROM Users u WHERE u.fullname = :fullname"),
+		@NamedQuery(name = "Users.findByPassword", query = "SELECT u FROM Users u WHERE u.password = :password"),
+		@NamedQuery(name = "Users.findByStatus", query = "SELECT u FROM Users u WHERE u.status = :status"),
+		@NamedQuery(name = "Users.findByUsername", query = "SELECT u FROM Users u WHERE u.username = :username"),
+		@NamedQuery(name = "Users.findByRole", query = "SELECT u FROM Users u WHERE u.role = :role") })
 public class Users implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "id")
-    private Long id;
-    @Size(max = 255)
-    @Column(name = "createdby")
-    private String createdby;
-    @Column(name = "createddate")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date createddate;
-    @Size(max = 255)
-    @Column(name = "modifiedby")
-    private String modifiedby;
-    @Column(name = "modifieddate")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date modifieddate;
-    // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
-    @Size(max = 255)
-    @Column(name = "email")
-    private String email;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 255)
-    @Column(name = "fullname")
-    private String fullname;
+	private static final long serialVersionUID = 1L;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Basic(optional = false)
+	@Column(name = "id")
+	private Long id;
+	@Size(max = 255)
+	@Column(name = "createdby")
+	private String createdby;
+	@Column(name = "createddate")
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date createddate;
+	@Size(max = 255)
+	@Column(name = "modifiedby")
+	private String modifiedby;
+	@Column(name = "modifieddate")
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date modifieddate;
+	// @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?",
+	// message="Invalid email")//if the field contains email address consider using
+	// this annotation to enforce field validation
+	@Size(max = 255)
+	@Column(name = "email")
+	private String email;
+	@Basic(optional = false)
+	@NotNull
+	@Size(min = 1, max = 255)
+	@Column(name = "fullname")
+	private String fullname;
 
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 20)
-    @Column(name = "account_number")
-    private String account_number;
-    
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 255)
-    @Column(name = "password")
-    private String password;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "status")
-    private int status;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 255)
-    @Column(name = "username")
-    private String username;
-    @Size(max = 10)
-    @Column(name = "role")
-    private String role;
-    @OneToMany(mappedBy = "userId")
-    private List<Comment> commentList;
-    @OneToMany(mappedBy = "userId")
-    private List<Saleorder> saleorderList;
+	@Basic(optional = false)
+	@NotNull
+	@Size(min = 1, max = 20)
+	@Column(name = "account_number")
+	private String account_number;
 
-    public Users() {
-    }
+	@Basic(optional = false)
+	@NotNull
+	@Size(min = 1, max = 255)
+	@Column(name = "password")
+	private String password;
+	@Basic(optional = false)
+	@NotNull
+	@Column(name = "status")
+	private int status;
+	@Basic(optional = false)
+	@NotNull
+	@Size(min = 1, max = 255)
+	@Column(name = "username")
+	private String username;
+	@Size(max = 10)
+	@Column(name = "role")
+	private String role;
+	@OneToMany(mappedBy = "userId")
+	private List<Comment> commentList;
+	@OneToMany(mappedBy = "userId")
+	private List<Saleorder> saleorderList;
 
-    public Users(Long id) {
-        this.id = id;
-    }
+	public Users() {
+	}
 
-    public Users(Long id, String fullname, String password, int status, String username) {
+	public Users(Long id) {
+		this.id = id;
+	}
+
+	public Users(Long id, String fullname, String password, int status, String username, String account_number, String role) {
         this.id = id;
         this.fullname = fullname;
         this.password = password;
         this.status = status;
         this.username = username;
+        this.account_number = account_number;
+        this.role = role.equals("ADMIN") ? "ADMIN" : "USER" ;
     }
-    public String getAccount_number() {
+	public Users(Long id, String fullname, String password, int status, String username, String account_number) {
+        this.id = id;
+        this.fullname = fullname;
+        this.password = password;
+        this.status = status;
+        this.username = username;
+        this.account_number = account_number;
+        this.role = "USER" ;
+    }
+	public String getAccount_number() {
 		return account_number;
 	}
 
@@ -121,133 +133,135 @@ public class Users implements Serializable {
 		this.account_number = account_number;
 	}
 
-    public Long getId() {
-        return id;
-    }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
 
-    public String getCreatedby() {
-        return createdby;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public void setCreatedby(String createdby) {
-        this.createdby = createdby;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public Date getCreateddate() {
-        return createddate;
-    }
+	public String getCreatedby() {
+		return createdby;
+	}
 
-    public void setCreateddate(Date createddate) {
-        this.createddate = createddate;
-    }
+	public void setCreatedby(String createdby) {
+		this.createdby = createdby;
+	}
 
-    public String getModifiedby() {
-        return modifiedby;
-    }
+	public Date getCreateddate() {
+		return createddate;
+	}
 
-    public void setModifiedby(String modifiedby) {
-        this.modifiedby = modifiedby;
-    }
+	public void setCreateddate(Date createddate) {
+		this.createddate = createddate;
+	}
 
-    public Date getModifieddate() {
-        return modifieddate;
-    }
+	public String getModifiedby() {
+		return modifiedby;
+	}
 
-    public void setModifieddate(Date modifieddate) {
-        this.modifieddate = modifieddate;
-    }
+	public void setModifiedby(String modifiedby) {
+		this.modifiedby = modifiedby;
+	}
 
-    public String getEmail() {
-        return email;
-    }
+	public Date getModifieddate() {
+		return modifieddate;
+	}
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+	public void setModifieddate(Date modifieddate) {
+		this.modifieddate = modifieddate;
+	}
 
-    public String getFullname() {
-        return fullname;
-    }
+	public String getEmail() {
+		return email;
+	}
 
-    public void setFullname(String fullname) {
-        this.fullname = fullname;
-    }
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
-    public String getPassword() {
-        return password;
-    }
+	public String getFullname() {
+		return fullname;
+	}
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+	public void setFullname(String fullname) {
+		this.fullname = fullname;
+	}
 
-    public int getStatus() {
-        return status;
-    }
+	public String getPassword() {
+		return password;
+	}
 
-    public void setStatus(int status) {
-        this.status = status;
-    }
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
-    public String getUsername() {
-        return username;
-    }
+	public int getStatus() {
+		return status;
+	}
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
+	public void setStatus(int status) {
+		this.status = status;
+	}
 
-    public String getRole() {
-        return role;
-    }
+	public String getUsername() {
+		return username;
+	}
 
-    public void setRole(String role) {
-        this.role = role;
-    }
+	public void setUsername(String username) {
+		this.username = username;
+	}
 
-    public List<Comment> getCommentList() {
-        return commentList;
-    }
+	public String getRole() {
+		return role;
+	}
 
-    public void setCommentList(List<Comment> commentList) {
-        this.commentList = commentList;
-    }
+	public void setRole(String role) {
+		this.role = role;
+	}
 
-    public List<Saleorder> getSaleorderList() {
-        return saleorderList;
-    }
+	public List<Comment> getCommentList() {
+		return commentList;
+	}
 
-    public void setSaleorderList(List<Saleorder> saleorderList) {
-        this.saleorderList = saleorderList;
-    }
+	public void setCommentList(List<Comment> commentList) {
+		this.commentList = commentList;
+	}
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
+	public List<Saleorder> getSaleorderList() {
+		return saleorderList;
+	}
 
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Users)) {
-            return false;
-        }
-        Users other = (Users) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
+	public void setSaleorderList(List<Saleorder> saleorderList) {
+		this.saleorderList = saleorderList;
+	}
 
-    @Override
-    public String toString() {
-        return "com.athttt.entity.Users[ id=" + id + " ]";
-    }
-    
+	@Override
+	public int hashCode() {
+		int hash = 0;
+		hash += (id != null ? id.hashCode() : 0);
+		return hash;
+	}
+
+	@Override
+	public boolean equals(Object object) {
+		// TODO: Warning - this method won't work in the case the id fields are not set
+		if (!(object instanceof Users)) {
+			return false;
+		}
+		Users other = (Users) object;
+		if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+			return false;
+		}
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "com.athttt.entity.Users[ id=" + id + " ]";
+	}
+
 }

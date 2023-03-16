@@ -38,8 +38,8 @@
 					<div class="breadcrumb__text">
 						<h4>Shopping Cart</h4>
 						<div class="breadcrumb__links">
-							<a href="./index.html">Home</a> <a href="./shop.html">Shop</a> <span>Shopping
-								Cart</span>
+							<a href="./">Home</a> <a href="./shop">Shop</a> 
+							<span>Shopping Cart</span>
 						</div>
 					</div>
 				</div>
