@@ -20,32 +20,32 @@
 			<!-- SIGN UP -->
 			<div class="col align-items-center flex-col sign-up">
 				<div class="form-wrapper align-items-center">
-				
-				
+
+
 					<form class="form sign-up" action="/register" method="post">
 						<div class="input-group">
-							<i class='bx bxs-user'></i> 
-							<input type="text" placeholder="Username" name="username">
+							<i class='bx bxs-user'></i> <input type="text"
+								placeholder="Username" name="username">
 						</div>
 						<div class="input-group">
-							<i class='bx bx-mail-send'></i> 
-							<input type="email" placeholder="Email" name="email">
+							<i class='bx bx-mail-send'></i> <input type="email"
+								placeholder="Email" name="email">
 						</div>
 						<div class="input-group">
-							<i class='bx bxs-lock-alt'></i> 
-							<input type="password" placeholder="Password" name="password">
+							<i class='bx bxs-lock-alt'></i> <input type="password"
+								placeholder="Password" name="password">
 						</div>
 						<div class="input-group">
-							<i class='bx bxs-lock-alt'></i> 
-							<input type="password" placeholder="Confirm password" name="confirm">
+							<i class='bx bxs-lock-alt'></i> <input type="password"
+								placeholder="Confirm password" name="confirm">
 						</div>
 						<button type="submit">Sign up</button>
 						<p>
-							<span> Already have an account? </span> <b onclick="toggle()"
-								class="pointer"> Sign in here </b>
+							<span> Already have an account? </span> 
+							<b onclick="toggle()" class="pointer"> Sign in here </b>
 						</p>
 					</form>
-				
+
 				</div>
 				<div class="form-wrapper">
 					<div class="social-list align-items-center sign-up">
@@ -68,27 +68,25 @@
 			<!-- SIGN IN -->
 			<div class="col align-items-center flex-col sign-in">
 				<div class="form-wrapper align-items-center">
-				
-				
-					<form class="form sign-in" action="/authenticate" method="post" enctype="application/json">
+					<form class="form sign-in" action="/authenticate" method="post"
+						enctype="application/json">
 						<div class="input-group">
-							<i class='bx bxs-user'></i>
-							<input required type="text"placeholder="Username" name="username">
+							<i class='bx bxs-user'></i> <input required type="text"
+								placeholder="Username" name="username">
 						</div>
 						<div class="input-group">
-							<i class='bx bxs-lock-alt'></i> 
-							<input required type="password" name = "password"placeholder="Password">
+							<i class='bx bxs-lock-alt'></i> <input required type="password"
+								name="password" placeholder="Password">
 						</div>
 						<button type="submit">Sign in</button>
 						<p>
 							<b> Forgot password? </b>
 						</p>
 						<p>
-							<span> Don't have an account? </span> <b onclick="toggle()"
-								class="pointer"> Sign up here </b>
+							<span> Don't have an account? </span> 
+							<b onclick="toggle()" class="pointer"> Sign up here </b>
 						</p>
 					</form>
-
 				</div>
 				<div class="form-wrapper">
 					<div class="social-list align-items-center sign-in">
@@ -116,10 +114,6 @@
 			<div class="col align-items-center flex-col">
 				<div class="text sign-in">
 					<h2>Welcome back</h2>
-					<p>Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-						Impedit obcaecati, accusantium molestias, laborum, aspernatur
-						deserunt officia voluptatum tempora dicta quo ab ullam. Assumenda
-						enim harum minima possimus dignissimos deserunt rem.</p>
 				</div>
 				<div class="img sign-in">
 					<img src="<c:url value = "/img/undraw_different_love_a3rg.svg"/>"
@@ -137,10 +131,6 @@
 				</div>
 				<div class="text sign-up">
 					<h2>Join with us</h2>
-					<p>Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-						Impedit obcaecati, accusantium molestias, laborum, aspernatur
-						deserunt officia voluptatum tempora dicta quo ab ullam. Assumenda
-						enim harum minima possimus dignissimos deserunt rem.</p>
 				</div>
 			</div>
 			<!-- END SIGN UP CONTENT -->

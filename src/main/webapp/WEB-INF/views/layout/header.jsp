@@ -52,7 +52,7 @@
 								<a href="/login">Sign in</a>
 							</sec:authorize>
 							<sec:authorize access="isAuthenticated()">
-								<a>ABC</a>
+								<a href="/profile">${currentUser.username}</a>
 								<a href="/logout">LOGOUT</a>
 							</sec:authorize>
 							<a href="#">FAQs</a>
@@ -87,7 +87,7 @@
 								<li><a href="./about.html">About Us</a></li>
 								<li><a href="./shop-details">Shop Details</a></li>
 								<li><a href="./my-cart">Shopping Cart</a></li>
-								<li><a href="./checkout.html">Check Out</a></li>
+								<li><a href="./checkout">Check Out</a></li>
 								<li><a href="./blog-details.html">Blog Details</a></li>
 							</ul></li>
 						<li><a href="./blog.html">Blog</a></li>
@@ -97,11 +97,10 @@
 			</div>
 			<div class="col-lg-3 col-md-3">
 				<div class="header__nav__option">
-					<a href="#" class="search-switch"><img
-						src="img/icon/search.png" alt=""></a> <a href="#"><img
-						src="img/icon/heart.png" alt=""></a> <a href="./my-cart"><img
-						src="img/icon/cart.png" alt=""> <span class="number">0</span></a>
-
+					<a href="#" class="search-switch"><img src="img/icon/search.png" alt=""></a> 
+					<a href="#"><img src="img/icon/heart.png" alt=""></a> 
+					<a href="./my-cart"><img src="img/icon/cart.png" alt="">
+					<span class="number">0</span></a>
 				</div>
 			</div>
 		</div>

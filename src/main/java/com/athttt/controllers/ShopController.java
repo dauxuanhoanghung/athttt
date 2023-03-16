@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,7 +23,7 @@ public class ShopController {
 	ProductService productService;
 	
 	@Autowired
-	UserService UserService;
+	UserService userService;
 	
 	@Autowired 
 	BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -30,7 +32,11 @@ public class ShopController {
 	public String index(Model model , @RequestParam Map<String, Object> searchMap ,
             @RequestParam(value = "page", defaultValue = "1", required = false) String page,
             @RequestParam(value = "id", required = false) String id) {
-		
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+	    if (authentication != null && authentication.isAuthenticated()) {
+	        Users currentUser = userService.findUserByUsername(authentication.getName());
+	        model.addAttribute("currentUser", currentUser);
+	    }
 		
 		Long pages = (long) Math.ceil(productService.count()/9.0);
 		if (Long.parseLong(page) > pages) {
@@ -49,12 +55,22 @@ public class ShopController {
 	}
 
 	@RequestMapping("/my-cart")
-	public String myCart() {
+	public String myCart(Model model) {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+	    if (authentication != null && authentication.isAuthenticated()) {
+	        Users currentUser = userService.findUserByUsername(authentication.getName());
+	        model.addAttribute("currentUser", currentUser);
+	    }
 		return "shopping-cart";
 	}
 
 	@RequestMapping("/checkout")
-	public String checkout() {
+	public String checkout(Model model) {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+	    if (authentication != null && authentication.isAuthenticated()) {
+	        Users currentUser = userService.findUserByUsername(authentication.getName());
+	        model.addAttribute("currentUser", currentUser);
+	    }
 		return "checkout";
 	}
 	
@@ -62,7 +78,7 @@ public class ShopController {
 	@RequestMapping("/my-register")
 	public String getRegister() {
 		Users newUser = new Users(null, "Hùng vip", "123456", 1, "hung12", "0123456465");
-		UserService.insert(newUser);
+		userService.insert(newUser);
 		System.out.println("HHEEEE");
 		return "redirect:/";
 	}
@@ -71,7 +87,7 @@ public class ShopController {
 	public String gx() {
 		String username = "hung11";
 		String password = "123456";
-		Users u = UserService.findUserByUsername(username);
+		Users u = userService.findUserByUsername(username);
 		if ( u != null) {
 			System.out.println(u.getUsername());
 			System.out.println(u.getPassword());

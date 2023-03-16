@@ -39,7 +39,7 @@
 					<div class="breadcrumb__text">
 						<h4>Shop</h4>
 						<div class="breadcrumb__links">
-							<a href="./index.html">Home</a> <span>Shop</span>
+							<a href="./">Home</a><span>Shop</span>
 						</div>
 					</div>
 				</div>
@@ -79,8 +79,6 @@
 													<li><a href="#">Clothing (20)</a></li>
 													<li><a href="#">Shoes (20)</a></li>
 													<li><a href="#">Accessories (20)</a></li>
-													<li><a href="#">Kids (20)</a></li>
-													<li><a href="#">Kids (20)</a></li>
 													<li><a href="#">Kids (20)</a></li>
 												</ul>
 											</div>
@@ -134,15 +132,14 @@
 										data-parent="#accordionExample">
 										<div class="card-body">
 											<div class="shop__sidebar__size">
-												<label for="xs">xs <input type="radio" id="xs">
-												</label> <label for="sm">s <input type="radio" id="sm">
-												</label> <label for="md">m <input type="radio" id="md">
-												</label> <label for="xl">xl <input type="radio" id="xl">
-												</label> <label for="2xl">2xl <input type="radio" id="2xl">
-												</label> <label for="xxl">xxl <input type="radio" id="xxl">
-												</label> <label for="3xl">3xl <input type="radio" id="3xl">
-												</label> <label for="4xl">4xl <input type="radio" id="4xl">
-												</label>
+												<label for="xs">xs <input type="radio" id="xs"></label> 
+												<label for="sm">s <input type="radio" id="sm"></label> 
+												<label for="md">m <input type="radio" id="md"></label> 
+												<label for="xl">xl <input type="radio" id="xl"></label> 
+												<label for="2xl">2xl <input type="radio" id="2xl"></label> 
+												<label for="xxl">xxl <input type="radio" id="xxl"></label> 
+												<label for="3xl">3xl <input type="radio" id="3xl"></label> 
+												<label for="4xl">4xl <input type="radio" id="4xl"></label>
 											</div>
 										</div>
 									</div>
@@ -155,24 +152,32 @@
 										data-parent="#accordionExample">
 										<div class="card-body">
 											<div class="shop__sidebar__color">
-												<label class="c-1" for="sp-1"> <input type="radio"
-													id="sp-1">
-												</label> <label class="c-2" for="sp-2"> <input type="radio"
-													id="sp-2">
-												</label> <label class="c-3" for="sp-3"> <input type="radio"
-													id="sp-3">
-												</label> <label class="c-4" for="sp-4"> <input type="radio"
-													id="sp-4">
-												</label> <label class="c-5" for="sp-5"> <input type="radio"
-													id="sp-5">
-												</label> <label class="c-6" for="sp-6"> <input type="radio"
-													id="sp-6">
-												</label> <label class="c-7" for="sp-7"> <input type="radio"
-													id="sp-7">
-												</label> <label class="c-8" for="sp-8"> <input type="radio"
-													id="sp-8">
-												</label> <label class="c-9" for="sp-9"> <input type="radio"
-													id="sp-9">
+												<label class="c-1" for="sp-1"> 
+													<input type="radio" id="sp-1">
+												</label> 
+												<label class="c-2" for="sp-2"> 
+													<input type="radio" id="sp-2">
+												</label> 
+												<label class="c-3" for="sp-3"> 
+													<input type="radio" id="sp-3">
+												</label> 
+												<label class="c-4" for="sp-4"> 
+													<input type="radio" id="sp-4">
+												</label> 
+												<label class="c-5" for="sp-5"> 
+													<input type="radio" id="sp-5">
+												</label> 
+												<label class="c-6" for="sp-6"> 
+													<input type="radio" id="sp-6">
+												</label> 
+												<label class="c-7" for="sp-7"> 
+													<input type="radio" id="sp-7">
+												</label> 
+												<label class="c-8" for="sp-8"> 
+													<input type="radio" id="sp-8">
+												</label> 
+												<label class="c-9" for="sp-9"> 
+													<input type="radio" id="sp-9">
 												</label>
 											</div>
 										</div>
