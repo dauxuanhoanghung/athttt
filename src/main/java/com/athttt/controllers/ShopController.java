@@ -95,9 +95,5 @@ public class ShopController {
 		return "redirect:/";
 	}
 
-	@PostMapping("/order")
-	public String addOrder(@RequestBody OrderRequest order) {
-		orderService.saleOrder(order);
-		return "abc";
-	}
+
 }
