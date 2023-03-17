@@ -87,8 +87,9 @@ public class ShopController {
 	
 	@RequestMapping("/bc")
 	public String gx() {
-		String username = "hung11";
-		String password = "123456";
+		String username = "chuchu";
+		String password = "Admin@123";
+		
 		Users u = userService.findUserByUsername(username);
 		if ( u != null) {
 			System.out.println(u.getUsername());

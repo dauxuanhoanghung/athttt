@@ -1,6 +1,5 @@
 package com.athttt.controllers;
 
-import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -15,7 +14,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -25,12 +23,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.UriUtils;
 
-import com.athttt.entity.LoginForm;
 import com.athttt.entity.Users;
 import com.athttt.service.UserService;
 
@@ -44,12 +39,11 @@ public class LoginController {
 
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
-	
+
 	@PostMapping("/authenticate")
 	public String authenticate(@RequestBody String username, @RequestBody String password, HttpSession session,
-			RedirectAttributes redirectAttributes) {
-//		String username = loginForm.getUsername();
-//		String password = loginForm.getPassword();
+			RedirectAttributes redirectAttributes) {	
+		username = UriUtils.decode(username, StandardCharsets.UTF_8);
 		System.out.println(username);
 		password = username.substring(username.lastIndexOf("=") + 1);
 		username = username.substring(username.indexOf("=") + 1, username.indexOf("&"));
@@ -81,37 +75,36 @@ public class LoginController {
 	public String auth() {
 		return "login";
 	}
-	
+
 	@PostMapping("/register")
 	public String registerHandler(@RequestBody String info, HttpServletRequest http) {
 		info = UriUtils.decode(info, StandardCharsets.UTF_8);
+		System.out.println(info);
 		List<String> kav = Arrays.asList(info.split("&"));
 		Map<String, String> infos = new HashMap<>();
 		kav.forEach(e -> {
 			String[] kv = e.split("=");
-			if(kv.length > 1)
+			if (kv.length > 1)
 				infos.put(kv[0], kv[1]);
 			System.out.println(kv[0] + " " + kv[1]);
 		});
 		Users u = userDetailsService.findUserByUsername(infos.getOrDefault("username", null));
 		if (u != null) {
 			System.out.println(u.getUsername());
-		}
-		else {
-			System.out.println("TẠO NÈ");
-			System.out.println(infos.getOrDefault("password", "123"));
-			Users newUsers = new Users(null, "", infos.get("password"), 1, infos.get("username"), 
-					infos.get("account_number"), "USER");
+			return "redirect:/login?register=true";
+		} else {
+			Users newUsers = new Users(null, infos.get("username"), infos.get("password"), 1,
+					infos.get("username"), infos.get("account_number"), "USER", null, null);
 			userDetailsService.insert(newUsers);
 		}
 		return "redirect:/login";
 	}
-	
+
 	@GetMapping("/profile")
 	public String showProfilePage(Model model) {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        Users currentUser = userDetailsService.findUserByUsername(authentication.getName());
-        model.addAttribute("currentUser", currentUser);
-	    return "profile";
+		Users currentUser = userDetailsService.findUserByUsername(authentication.getName());
+		model.addAttribute("currentUser", currentUser);
+		return "profile";
 	}
 }
