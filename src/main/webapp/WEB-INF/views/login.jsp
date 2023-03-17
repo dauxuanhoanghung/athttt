@@ -98,7 +98,7 @@
 						<div class="input-group">
 							<i class='bx bxs-lock-alt'></i> <input required type="password"
 								name="password" placeholder="Password" 
-								pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$">
+								>
 						</div>
 						<button type="submit">Sign in</button>
 						<p>
