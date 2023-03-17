@@ -224,10 +224,12 @@ CREATE TABLE `users` (
   `username` varchar(255) NOT NULL,
   `role` varchar(10) DEFAULT NULL,
   `account_number` varchar(20) DEFAULT NULL,
+  `phone` varchar(10) DEFAULT NULL,
+  `address` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UK_r43af9ap4edm43mmtq01oddj6` (`username`),
   UNIQUE KEY `UK_6dotkott2kjsp8vw4d0m25fb7` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -236,7 +238,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,NULL,NULL,NULL,NULL,NULL,'admin','$2a$10$/RUbuT9KIqk6f8enaTQiLOXzhnUkiwEJRdtzdrMXXwU7dgnLKTCYG',1,'admin','ADMIN','123456'),(2,NULL,NULL,'admin','2023-02-24 19:03:50',NULL,'nguyen van a','$2a$10$luzLXQRXH3rfHejevyzI.eLqH58DnZ2LoCj3B6XBrQt4NIP0GHmnq',1,'nguyenvana','USER','789987');
+INSERT INTO `users` VALUES (1,NULL,NULL,NULL,NULL,'chu1@gmail.com','admin','$2a$10$lUrBPyGLZfSBKkqftycIJ.uw1t6EEM24QWsRt6ISfyHF/Pgf1lSzG',1,'admin','ADMIN','123456','123123123','Nguyễn Kiệm'),(2,NULL,NULL,'admin','2023-02-24 19:03:50','chu2@gmail.com','nguyen van a','$2a$10$lUrBPyGLZfSBKkqftycIJ.uw1t6EEM24QWsRt6ISfyHF/Pgf1lSzG',1,'nguyenvana','USER','789987','123123123','Nguyễn Kiệm'),(3,NULL,NULL,NULL,NULL,'chu3@gmail.com','Hùng vip','$2a$10$lUrBPyGLZfSBKkqftycIJ.uw1t6EEM24QWsRt6ISfyHF/Pgf1lSzG',1,'hung11','USER','0123456465','123123123','Nguyễn Kiệm'),(4,NULL,NULL,NULL,NULL,'chu4@gmail.com','Hùng vip','$2a$10$lUrBPyGLZfSBKkqftycIJ.uw1t6EEM24QWsRt6ISfyHF/Pgf1lSzG',1,'hung12','USER','0123456465','123123123','Nguyễn Kiệm');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -249,4 +251,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-03-14 21:21:42
+-- Dump completed on 2023-03-17 12:35:05
