@@ -22,10 +22,10 @@
 			<div class="col align-items-center flex-col sign-up">
 				<div class="form-wrapper align-items-center">
 
-		
+
 					<form class="form sign-up" action="/register" method="post">
 						<%
-							if (request.getParameter("error") != null && !request.getParameter("error").isEmpty()) {
+							if (request.getParameter("register") != null && !request.getParameter("register").isEmpty()) {
 						%>
 						<div
 							style="position: relative; padding: 0.75rem 1.25rem; margin-bottom: 1rem; border: 1px solid transparent; color: #721c24; background-color: #f8d7da; border-color: #f5c6cb; border-radius: 0.25rem;"
@@ -34,19 +34,21 @@
 							}
 						%>
 						<div class="input-group">
-							<i class='bx bxs-user'></i> <input type="text"
+							<i class='bx bxs-user'></i> <input type="text" required
 								placeholder="Username" name="username">
 						</div>
 						<div class="input-group">
-							<i class='bx bx-mail-send'></i> <input type="email"
+							<i class='bx bx-mail-send'></i> <input type="email" 
 								placeholder="Email" name="email">
 						</div>
 						<div class="input-group">
-							<i class='bx bxs-lock-alt'></i> <input type="password"
+							<i class='bx bxs-lock-alt'></i> <input type="password" required
+								pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
 								placeholder="Password" name="password">
 						</div>
 						<div class="input-group">
-							<i class='bx bxs-lock-alt'></i> <input type="password"
+							<i class='bx bxs-lock-alt'></i> <input type="password" required
+								pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
 								placeholder="Confirm password" name="confirm">
 						</div>
 						<button type="submit">Sign up</button>
@@ -90,12 +92,13 @@
 							}
 						%>
 						<div class="input-group">
-							<i class='bx bxs-user'></i> <input required type="text"
+							<i class='bx bxs-user'></i> <input required type="text" 
 								placeholder="Username" name="username">
 						</div>
 						<div class="input-group">
 							<i class='bx bxs-lock-alt'></i> <input required type="password"
-								name="password" placeholder="Password">
+								name="password" placeholder="Password" 
+								pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$">
 						</div>
 						<button type="submit">Sign in</button>
 						<p>
