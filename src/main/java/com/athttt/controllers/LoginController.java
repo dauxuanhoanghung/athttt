@@ -15,10 +15,13 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -97,12 +100,18 @@ public class LoginController {
 		else {
 			System.out.println("TẠO NÈ");
 			System.out.println(infos.getOrDefault("password", "123"));
-			Users newUser = new Users(null, "Hùng vip", "123456", 1, "hung13", "0123456465");
+			Users newUsers = new Users(null, "", infos.get("password"), 1, infos.get("username"), 
+					infos.get("account_number"), "USER");
+			userDetailsService.insert(newUsers);
 		}
-//		Users u = userDetailsService.insert(newUser);
-//		if (u == null) {
-//			return "Lỗi";
-//		}
 		return "redirect:/login";
+	}
+	
+	@GetMapping("/profile")
+	public String showProfilePage(Model model) {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Users currentUser = userDetailsService.findUserByUsername(authentication.getName());
+        model.addAttribute("currentUser", currentUser);
+	    return "profile";
 	}
 }
