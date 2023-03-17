@@ -73,13 +73,13 @@ public class Users implements Serializable {
 	private String fullname;
 
 	@Basic(optional = false)
-	@Size(min = 1, max = 20)
+	@Size(min = 0, max = 20)
 	@Column(name = "account_number")
 	private String accountNumber;
 
 	
 	@Basic(optional = false)
-	@Size(min = 1, max = 10)
+	@Size(min = 0, max = 10)
 	@Column(name = "phone")
 	private String phone;
 	

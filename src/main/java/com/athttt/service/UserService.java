@@ -2,6 +2,8 @@ package com.athttt.service;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +37,17 @@ public class UserService implements UserDetailsService {
 
 	public List<Users> getAll() {
 		return userRepository.findAll();
+	}
+	
+	public Users updateUsers(Map<String, String> info) {
+		Users currentUser = userRepository.findById(Long.parseLong(info.get("id"))).get();
+		currentUser.setEmail(info.get("email"));
+		currentUser.setPhone(info.get("phone"));
+		currentUser.setFullname(info.get("fullname"));
+		currentUser.setAddress(info.get("address"));
+		currentUser.setAccountNumber(info.get("account_number"));
+		userRepository.save(currentUser);
+		return currentUser;
 	}
 	
 	public Users findUserByUsername(String username) {
