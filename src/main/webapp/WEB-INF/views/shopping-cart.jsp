@@ -1,6 +1,9 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core"%>
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core"%>
+
 
 <!DOCTYPE html>
 <html lang="zxx">
@@ -19,15 +22,15 @@
 	rel="stylesheet">
 
 
-    <c:import url="/WEB-INF/views/layout/css.jsp" />
+<c:import url="/WEB-INF/views/layout/css.jsp" />
 
 </head>
 
 <body>
 
-    <!-- Header Section Begin -->
-    <c:import url="/WEB-INF/views/layout/header.jsp" />
-    <!-- Header Section End -->
+	<!-- Header Section Begin -->
+	<c:import url="/WEB-INF/views/layout/header.jsp" />
+	<!-- Header Section End -->
 
 
 	<!-- Breadcrumb Section Begin -->
@@ -38,8 +41,8 @@
 					<div class="breadcrumb__text">
 						<h4>Shopping Cart</h4>
 						<div class="breadcrumb__links">
-							<a href="./">Home</a> <a href="./shop">Shop</a> 
-							<span>Shopping Cart</span>
+							<a href="./">Home</a> <a href="./shop">Shop</a> <span>Shopping
+								Cart</span>
 						</div>
 					</div>
 				</div>
@@ -64,7 +67,7 @@
 								</tr>
 							</thead>
 							<tbody class="tbody-shopping">
-								
+
 							</tbody>
 						</table>
 					</div>
@@ -95,7 +98,12 @@
 							<li>Subtotal <span>$ 169.50</span></li>
 							<li>Total <span>$ 169.50</span></li>
 						</ul>
-						<a href="#" class="primary-btn">Proceed to checkout</a>
+						<sec:authorize access="isAuthenticated()">
+							<a href="/checkout" class="primary-btn">Proceed to checkout</a>
+						</sec:authorize>
+						<sec:authorize access="!isAuthenticated()">
+							<a href="/checkout" class="primary-btn">Please login first</a>
+						</sec:authorize>
 					</div>
 				</div>
 			</div>
@@ -104,15 +112,15 @@
 	<!-- Shopping Cart Section End -->
 
 
-    <!-- Footer Section Begin -->
-    <c:import url="/WEB-INF/views/layout/footer.jsp" />
-    <!-- Footer Section End -->
+	<!-- Footer Section Begin -->
+	<c:import url="/WEB-INF/views/layout/footer.jsp" />
+	<!-- Footer Section End -->
 
-    <!-- Js Plugins -->
-	<c:import url="/WEB-INF/views/layout/js.jsp" />
-	
 	<!-- Js Plugins -->
-	 <script>
+	<c:import url="/WEB-INF/views/layout/js.jsp" />
+
+	<!-- Js Plugins -->
+	<script>
       document.addEventListener("DOMContentLoaded", function() {
         let listItem = JSON.parse(localStorage.getItem("listItem")) || []
         let body = document.querySelector(".tbody-shopping")
@@ -231,7 +239,6 @@
                 this.saveToLocalStorage(result)
                 return result;
               }, []);
-
             }
       }
     </script>

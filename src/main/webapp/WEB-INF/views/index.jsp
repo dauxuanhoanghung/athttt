@@ -39,8 +39,8 @@
 								<h2>Fall - Winter Collections 2030</h2>
 								<p>A specialist label creating luxury essentials. Ethically
 									crafted with an unwavering commitment to exceptional quality.</p>
-								<a href="#" class="primary-btn">Shop
-									now <span class="arrow_right"></span>
+								<a href="#" class="primary-btn">Shop now <span
+									class="arrow_right"></span>
 								</a>
 								<div class="hero__social">
 									<a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i
@@ -62,8 +62,8 @@
 								<h2>Fall - Winter Collections 2030</h2>
 								<p>A specialist label creating luxury essentials. Ethically
 									crafted with an unwavering commitment to exceptional quality.</p>
-								<a href="#" class="primary-btn">Shop
-									now <span class="arrow_right"></span>
+								<a href="#" class="primary-btn">Shop now <span
+									class="arrow_right"></span>
 								</a>
 								<div class="hero__social">
 									<a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i
@@ -144,8 +144,8 @@
 							<ul class="product__hover">
 								<li><a href="#"><img src="img/icon/heart.png" alt="" /></a>
 								</li>
-								<li><a href="#"><img
-										src="img/icon/compare.png" alt="" /> <span>Compare</span></a></li>
+								<li><a href="#"><img src="img/icon/compare.png" alt="" />
+										<span>Compare</span></a></li>
 								<li><a href="#"><img src="img/icon/search.png" alt="" /></a>
 								</li>
 							</ul>
@@ -178,8 +178,8 @@
 							<ul class="product__hover">
 								<li><a href="#"><img src="img/icon/heart.png" alt="" /></a>
 								</li>
-								<li><a href="#"><img
-										src="img/icon/compare.png" alt="" /> <span>Compare</span></a></li>
+								<li><a href="#"><img src="img/icon/compare.png" alt="" />
+										<span>Compare</span></a></li>
 								<li><a href="#"><img src="img/icon/search.png" alt="" /></a>
 								</li>
 							</ul>
@@ -213,8 +213,8 @@
 							<ul class="product__hover">
 								<li><a href="#"><img src="img/icon/heart.png" alt="" /></a>
 								</li>
-								<li><a href="#"><img
-										src="img/icon/compare.png" alt="" /> <span>Compare</span></a></li>
+								<li><a href="#"><img src="img/icon/compare.png" alt="" />
+										<span>Compare</span></a></li>
 								<li><a href="#"><img src="img/icon/search.png" alt="" /></a>
 								</li>
 							</ul>
@@ -247,8 +247,8 @@
 							<ul class="product__hover">
 								<li><a href="#"><img src="img/icon/heart.png" alt="" /></a>
 								</li>
-								<li><a href="#"><img
-										src="img/icon/compare.png" alt="" /> <span>Compare</span></a></li>
+								<li><a href="#"><img src="img/icon/compare.png" alt="" />
+										<span>Compare</span></a></li>
 								<li><a href="#"><img src="img/icon/search.png" alt="" /></a>
 								</li>
 							</ul>
@@ -281,8 +281,8 @@
 							<ul class="product__hover">
 								<li><a href="#"><img src="img/icon/heart.png" alt="" /></a>
 								</li>
-								<li><a href="#"><img
-										src="img/icon/compare.png" alt="" /> <span>Compare</span></a></li>
+								<li><a href="#"><img src="img/icon/compare.png" alt="" />
+										<span>Compare</span></a></li>
 								<li><a href="#"><img src="img/icon/search.png" alt="" /></a>
 								</li>
 							</ul>
@@ -316,8 +316,8 @@
 							<ul class="product__hover">
 								<li><a href="#"><img src="img/icon/heart.png" alt="" /></a>
 								</li>
-								<li><a href="#"><img
-										src="img/icon/compare.png" alt="" /> <span>Compare</span></a></li>
+								<li><a href="#"><img src="img/icon/compare.png" alt="" />
+										<span>Compare</span></a></li>
 								<li><a href="#"><img src="img/icon/search.png" alt="" /></a>
 								</li>
 							</ul>
@@ -350,8 +350,8 @@
 							<ul class="product__hover">
 								<li><a href="#"><img src="img/icon/heart.png" alt="" /></a>
 								</li>
-								<li><a href="#"><img
-										src="img/icon/compare.png" alt="" /> <span>Compare</span></a></li>
+								<li><a href="#"><img src="img/icon/compare.png" alt="" />
+										<span>Compare</span></a></li>
 								<li><a href="#"><img src="img/icon/search.png" alt="" /></a>
 								</li>
 							</ul>
@@ -384,8 +384,8 @@
 							<ul class="product__hover">
 								<li><a href="#"><img src="img/icon/heart.png" alt="" /></a>
 								</li>
-								<li><a href="#"><img
-										src="img/icon/compare.png" alt="" /> <span>Compare</span></a></li>
+								<li><a href="#"><img src="img/icon/compare.png" alt="" />
+										<span>Compare</span></a></li>
 								<li><a href="#"><img src="img/icon/search.png" alt="" /></a>
 								</li>
 							</ul>
@@ -517,8 +517,8 @@
 						<div class="blog__item__pic set-bg"
 							data-setbg="img/blog/blog-1.jpg"></div>
 						<div class="blog__item__text">
-							<span><img src="img/icon/calendar.png"
-								alt="" /> 16 February 2020</span>
+							<span><img src="img/icon/calendar.png" alt="" /> 16
+								February 2020</span>
 							<h5>What Curling Irons Are The Best Ones</h5>
 							<a href="#">Read More</a>
 						</div>
@@ -529,8 +529,8 @@
 						<div class="blog__item__pic set-bg"
 							data-setbg="img/blog/blog-2.jpg"></div>
 						<div class="blog__item__text">
-							<span><img src="img/icon/calendar.png"
-								alt="" /> 21 February 2020</span>
+							<span><img src="img/icon/calendar.png" alt="" /> 21
+								February 2020</span>
 							<h5>Eternity Bands Do Last Forever</h5>
 							<a href="#">Read More</a>
 						</div>
@@ -541,8 +541,8 @@
 						<div class="blog__item__pic set-bg"
 							data-setbg="img/blog/blog-3.jpg"></div>
 						<div class="blog__item__text">
-							<span><img src="img/icon/calendar.png"
-								alt="" /> 28 February 2020</span>
+							<span><img src="img/icon/calendar.png" alt="" /> 28
+								February 2020</span>
 							<h5>The Health Benefits Of Sunglasses</h5>
 							<a href="#">Read More</a>
 						</div>
@@ -561,6 +561,21 @@
 	<c:import url="/WEB-INF/views/layout/js.jsp" />
 
 
-
+	<script>
+	  document.addEventListener("DOMContentLoaded", function() {
+		  cart.updateQuantity(cart.getListItemFromLocalStorage())
+	  })
+	   const cart = {
+	            getListItemFromLocalStorage () {
+	              return JSON.parse(localStorage.getItem("listItem")) || []
+	            },
+	            updateQuantity(listItem = []) {
+	              const totalQuantity = listItem.reduce((accumulator, currentValue) => {
+	                return accumulator + currentValue.quantity;
+	              }, 0);
+	              document.querySelector(".header__nav__option .number").innerHTML = totalQuantity;
+	            }
+	   }
+	</script>
 </body>
 </html>

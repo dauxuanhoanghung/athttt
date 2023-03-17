@@ -7,6 +7,8 @@ package com.athttt.entity;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
+
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -31,123 +33,125 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @Table(name = "saleorder")
-@NamedQueries({
-    @NamedQuery(name = "Saleorder.findAll", query = "SELECT s FROM Saleorder s"),
-    @NamedQuery(name = "Saleorder.findById", query = "SELECT s FROM Saleorder s WHERE s.id = :id"),
-    @NamedQuery(name = "Saleorder.findByCode", query = "SELECT s FROM Saleorder s WHERE s.code = :code"),
-    @NamedQuery(name = "Saleorder.findBySubtotal", query = "SELECT s FROM Saleorder s WHERE s.subtotal = :subtotal"),
-    @NamedQuery(name = "Saleorder.findByCreatedDate", query = "SELECT s FROM Saleorder s WHERE s.createdDate = :createdDate"),
-   })
+@NamedQueries({ @NamedQuery(name = "Saleorder.findAll", query = "SELECT s FROM Saleorder s"),
+		@NamedQuery(name = "Saleorder.findById", query = "SELECT s FROM Saleorder s WHERE s.id = :id"),
+		@NamedQuery(name = "Saleorder.findByCode", query = "SELECT s FROM Saleorder s WHERE s.code = :code"),
+		@NamedQuery(name = "Saleorder.findBySubtotal", query = "SELECT s FROM Saleorder s WHERE s.subtotal = :subtotal"),
+		@NamedQuery(name = "Saleorder.findByCreatedDate", query = "SELECT s FROM Saleorder s WHERE s.createdDate = :createdDate"), })
 public class Saleorder implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "id")
-    private Long id;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 50)
-    @Column(name = "code")
-    private String code;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(name = "subtotal")
-    private Float subtotal;
-    @Column(name = "createdDate")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date createdDate;
-    
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "orderId")
-    private List<Saleorderdetails> saleorderdetailsList;
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
-    @ManyToOne
-    private Users userId;
+	private static final long serialVersionUID = 1L;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Basic(optional = false)
+	@Column(name = "id")
+	private Long id;
+	@Basic(optional = false)
+	@NotNull
+	@Size(min = 1, max = 50)
+	@Column(name = "code")
+	private String code;
+	// @Max(value=?) @Min(value=?)//if you know range of your decimal fields
+	// consider using these annotations to enforce field validation
+	@Column(name = "subtotal")
+	private Float subtotal;
+	@Column(name = "createdDate")
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date createdDate;
 
-    public Saleorder() {
-    }
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "orderId")
+	private List<Saleorderdetails> saleorderdetailsList;
+	@JoinColumn(name = "user_id", referencedColumnName = "id")
+	@ManyToOne
+	private Users userId;
 
-    public Saleorder(Long id) {
-        this.id = id;
-    }
+	{
+		this.code = UUID.randomUUID().toString();
+	}
 
-    public Saleorder(Long id, String code) {
-        this.id = id;
-        this.code = code;
-    }
+	public Saleorder() {
+	}
 
-    public Long getId() {
-        return id;
-    }
+	public Saleorder(Long id) {
+		this.id = id;
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public Saleorder(Long id, String code) {
+		this.id = id;
+		this.code = code;
+	}
 
-    public String getCode() {
-        return code;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public void setCode(String code) {
-        this.code = code;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public Float getSubtotal() {
-        return subtotal;
-    }
+	public String getCode() {
+		return code;
+	}
 
-    public void setSubtotal(Float subtotal) {
-        this.subtotal = subtotal;
-    }
+	public void setCode(String code) {
+		this.code = code;
+	}
 
-    public Date getCreatedDate() {
-        return createdDate;
-    }
+	public Float getSubtotal() {
+		return subtotal;
+	}
 
-    public void setCreatedDate(Date createdDate) {
-        this.createdDate = createdDate;
-    }
+	public void setSubtotal(Float subtotal) {
+		this.subtotal = subtotal;
+	}
 
+	public Date getCreatedDate() {
+		return createdDate;
+	}
 
-    public List<Saleorderdetails> getSaleorderdetailsList() {
-        return saleorderdetailsList;
-    }
+	public void setCreatedDate(Date createdDate) {
+		this.createdDate = createdDate;
+	}
 
-    public void setSaleorderdetailsList(List<Saleorderdetails> saleorderdetailsList) {
-        this.saleorderdetailsList = saleorderdetailsList;
-    }
+	public List<Saleorderdetails> getSaleorderdetailsList() {
+		return saleorderdetailsList;
+	}
 
-    public Users getUserId() {
-        return userId;
-    }
+	public void setSaleorderdetailsList(List<Saleorderdetails> saleorderdetailsList) {
+		this.saleorderdetailsList = saleorderdetailsList;
+	}
 
-    public void setUserId(Users userId) {
-        this.userId = userId;
-    }
+	public Users getUserId() {
+		return userId;
+	}
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
+	public void setUserId(Users userId) {
+		this.userId = userId;
+	}
 
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Saleorder)) {
-            return false;
-        }
-        Saleorder other = (Saleorder) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
+	@Override
+	public int hashCode() {
+		int hash = 0;
+		hash += (id != null ? id.hashCode() : 0);
+		return hash;
+	}
 
-    @Override
-    public String toString() {
-        return "com.athttt.entity.Saleorder[ id=" + id + " ]";
-    }
-    
+	@Override
+	public boolean equals(Object object) {
+		// TODO: Warning - this method won't work in the case the id fields are not set
+		if (!(object instanceof Saleorder)) {
+			return false;
+		}
+		Saleorder other = (Saleorder) object;
+		if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+			return false;
+		}
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "com.athttt.entity.Saleorder[ id=" + id + " ]";
+	}
+
 }

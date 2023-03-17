@@ -40,7 +40,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests()
 		.antMatchers("/", "/shop", "/my-cart", "/login", "/authenticate").permitAll()
 		.antMatchers("/admin/**").hasRole("ADMIN")
-		.antMatchers("/profile").authenticated()
+		.antMatchers("/profile", "/checkout", "/order").authenticated()
 		.and().headers().defaultsDisabled().contentTypeOptions();
 		http.formLogin()
 				.loginPage("/login")
@@ -53,6 +53,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.invalidateHttpSession(true)
 				.deleteCookies("JSESSIONID");
 		http.csrf().disable();
+		http.cors().disable();
 	}
 
 	@Autowired

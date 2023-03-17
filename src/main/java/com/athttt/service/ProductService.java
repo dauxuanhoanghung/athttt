@@ -24,7 +24,10 @@ public class ProductService {
     public Long count() {
         return productRepository.count();
     }
-
+    
+    public Product findProductById(Long id) {
+    	return productRepository.getOne(id);
+    }
     public List<Product> getProducts(Map<String, Object> searchMap, Integer page) {
         Pageable pageable = PageRequest.of(page - 1, 9);
         Page<Product> productPage = productRepository.findAll(pageable);
