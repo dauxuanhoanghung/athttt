@@ -77,17 +77,8 @@ public class LoginController {
 	}
 
 	@PostMapping("/register")
-	public String registerHandler(@RequestBody String info, HttpServletRequest http) {
-		info = UriUtils.decode(info, StandardCharsets.UTF_8);
-		System.out.println(info);
-		List<String> kav = Arrays.asList(info.split("&"));
-		Map<String, String> infos = new HashMap<>();
-		kav.forEach(e -> {
-			String[] kv = e.split("=");
-			if (kv.length > 1)
-				infos.put(kv[0], kv[1]);
-			System.out.println(kv[0] + " " + kv[1]);
-		});
+	public String registerHandler(@RequestBody String info, HttpServletRequest http) {		
+		Map<String, String> infos = this.splitResquestBody(info);
 		Users u = userDetailsService.findUserByUsername(infos.getOrDefault("username", null));
 		if (u != null) {
 			System.out.println(u.getUsername());
@@ -106,5 +97,36 @@ public class LoginController {
 		Users currentUser = userDetailsService.findUserByUsername(authentication.getName());
 		model.addAttribute("currentUser", currentUser);
 		return "profile";
+	}
+	
+	@PostMapping("/profile")
+	public String updateProfile(@RequestBody(required = false) String res, Model model) {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		Users currentUser = userDetailsService.findUserByUsername(authentication.getName());
+		model.addAttribute("currentUser", currentUser);
+		model.addAttribute("success", "Update your information successful !!!");
+		Map<String, String> infos = this.splitResquestBody(res);
+		infos.put("id", currentUser.getId().toString());
+		currentUser = userDetailsService.updateUsers(infos);
+		return "profile";
+	}
+	
+	private Map<String, String> splitResquestBody(String res) {
+		if (res != null) {
+			res = UriUtils.decode(res, StandardCharsets.UTF_8).replace("+", " ");
+			System.out.println(res);
+			List<String> kav = Arrays.asList(res.split("&"));
+			System.out.println(kav);
+			Map<String, String> infos = new HashMap<>();
+			kav.forEach(e -> {
+				String[] kv = e.split("=");
+				if (kv.length > 1)
+					infos.put(kv[0], kv[1]);
+				else
+					infos.put(kv[0], "");
+			});
+			return infos;
+		}
+		return null;
 	}
 }
