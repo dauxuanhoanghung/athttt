@@ -14,15 +14,25 @@
 </head>
 
 <body>
-	<div id="container" class="container">
+	<div id="container" class="container sign-in">
+
 		<!-- FORM SECTION -->
 		<div class="row">
 			<!-- SIGN UP -->
 			<div class="col align-items-center flex-col sign-up">
 				<div class="form-wrapper align-items-center">
 
-
+		
 					<form class="form sign-up" action="/register" method="post">
+						<%
+							if (request.getParameter("error") != null && !request.getParameter("error").isEmpty()) {
+						%>
+						<div
+							style="position: relative; padding: 0.75rem 1.25rem; margin-bottom: 1rem; border: 1px solid transparent; color: #721c24; background-color: #f8d7da; border-color: #f5c6cb; border-radius: 0.25rem;"
+							class="alert alert-danger" role="alert">Sign up fail</div>
+						<%
+							}
+						%>
 						<div class="input-group">
 							<i class='bx bxs-user'></i> <input type="text"
 								placeholder="Username" name="username">
@@ -41,8 +51,8 @@
 						</div>
 						<button type="submit">Sign up</button>
 						<p>
-							<span> Already have an account? </span> 
-							<b onclick="toggle()" class="pointer"> Sign in here </b>
+							<span> Already have an account? </span> <b onclick="toggle()"
+								class="pointer"> Sign in here </b>
 						</p>
 					</form>
 
@@ -70,6 +80,15 @@
 				<div class="form-wrapper align-items-center">
 					<form class="form sign-in" action="/authenticate" method="post"
 						enctype="application/json">
+						<%
+							if (request.getParameter("error") != null && !request.getParameter("error").isEmpty()) {
+						%>
+						<div
+							style="position: relative; padding: 0.75rem 1.25rem; margin-bottom: 1rem; border: 1px solid transparent; color: #721c24; background-color: #f8d7da; border-color: #f5c6cb; border-radius: 0.25rem;"
+							class="alert alert-danger" role="alert">Login fail</div>
+						<%
+							}
+						%>
 						<div class="input-group">
 							<i class='bx bxs-user'></i> <input required type="text"
 								placeholder="Username" name="username">
@@ -83,8 +102,8 @@
 							<b> Forgot password? </b>
 						</p>
 						<p>
-							<span> Don't have an account? </span> 
-							<b onclick="toggle()" class="pointer"> Sign up here </b>
+							<span> Don't have an account? </span> <b onclick="toggle()"
+								class="pointer"> Sign up here </b>
 						</p>
 					</form>
 				</div>
