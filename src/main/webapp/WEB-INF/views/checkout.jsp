@@ -48,11 +48,8 @@
 	<section class="checkout spad">
 		<div class="container">
 			<div class="checkout__form">
-
-
 				<form class="form_product" action="/order" method="post">
 					<div class="row">
-
 		<div class="col-lg-8 col-md-6">
                             <h6 class="coupon__code"><span class="icon_tag_alt"></span> Have a coupon? <a href="#">Click
                             here</a> to enter your code</h6>
@@ -181,6 +178,33 @@
 			      "Content-Type": "application/json"
 			    },
 			    body: JSON.stringify({products: ids_product, userID: ${currentUser.id} })
+		  }).then((res) => {
+			  console.log(res.status==200);
+			  let cont = document.querySelector("body > section.checkout.spad").innerHTML;
+			  if (res.status==200) {
+			  let html = `
+			  <div class = "container">
+		  	<div style = "text-align: center;max-width: 300px ;margin-left: auto;" class="alert alert-success col-md-12" role="alert">
+	          	Thanh toán thành công !
+	        </div>
+	        </div>`;
+	        document.querySelector("body > section.checkout.spad").innerHTML = html + cont;
+			  localStorage.removeItem("listItem");
+			  
+			  setTimeout(() => {
+				 window.location.href = "http://localhost:8080/shop";
+			  }, 1000)
+			  }
+			  else {
+				  let html = `
+					  <div class = "container">
+				  	<div style = "text-align: center;max-width: 300px ;margin-left: auto;" class="alert alert-danger col-md-12" role="alert">
+			          	Failed sml
+			        </div>
+			        </div>`;
+			        document.querySelector("body > section.checkout.spad").innerHTML = html + cont;
+			  }
+		
 		  });
 		
 	})
