@@ -38,11 +38,13 @@ public class ShopController {
 	        model.addAttribute("currentUser", currentUser);
 	    }
 		
-		Long pages = (long) Math.ceil(productService.count()/9.0);
+	    long productCount = productService.count();
+		Long pages = (long) Math.ceil(productCount/9.0);
 		if (Long.parseLong(page) > pages) {
             page = "1";
         }
 		List<Product> listProduct = productService.getProducts(searchMap, Integer.valueOf(page));
+		model.addAttribute("productCount", productCount);
 		model.addAttribute("totalPage", pages);
 		model.addAttribute("products", listProduct);
 		
