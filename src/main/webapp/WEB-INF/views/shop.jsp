@@ -287,8 +287,17 @@
 	<c:import url="/WEB-INF/views/layout/js.jsp" />
 
 	<script>
+	
+	 document.addEventListener("DOMContentLoaded", function() {
+		  cart.updateQuantity(cart.getListItemFromLocalStorage())
+	  })
         const cart = {
-
+		 updateQuantity(listItem = []) {
+             const totalQuantity = listItem.reduce((accumulator, currentValue) => {
+               return accumulator + currentValue.quantity;
+             }, 0);
+             document.querySelector(".header__nav__option .number").innerHTML = totalQuantity;
+           },
             addToCart(id,name, price, thumbnail ) {
                 let listItem = JSON.parse(localStorage.getItem("listItem")) || []
                 const totalQuantity = listItem.reduce((accumulator, currentValue) => {
