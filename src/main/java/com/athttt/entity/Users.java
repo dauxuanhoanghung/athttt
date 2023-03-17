@@ -73,11 +73,22 @@ public class Users implements Serializable {
 	private String fullname;
 
 	@Basic(optional = false)
-	@NotNull
 	@Size(min = 1, max = 20)
 	@Column(name = "account_number")
-	private String account_number;
+	private String accountNumber;
 
+	
+	@Basic(optional = false)
+	@Size(min = 1, max = 10)
+	@Column(name = "phone")
+	private String phone;
+	
+	@Basic(optional = false)
+	@Size(min = 1, max = 100)
+	@Column(name = "address")
+	private String address;
+	
+	
 	@Basic(optional = false)
 	@NotNull
 	@Size(min = 1, max = 255)
@@ -107,13 +118,16 @@ public class Users implements Serializable {
 		this.id = id;
 	}
 
-	public Users(Long id, String fullname, String password, int status, String username, String account_number, String role) {
+	public Users(Long id, String fullname, String password, int status, String username, String account_number, String role
+			, String address, String phone) {
         this.id = id;
         this.fullname = fullname;
         this.password = password;
         this.status = status;
         this.username = username;
-        this.account_number = account_number;
+        this.accountNumber = account_number;
+        this.address = address;
+        this.phone = phone;
         this.role = role.equals("ADMIN") ? "ADMIN" : "USER" ;
     }
 	public Users(Long id, String fullname, String password, int status, String username, String account_number) {
@@ -122,18 +136,37 @@ public class Users implements Serializable {
         this.password = password;
         this.status = status;
         this.username = username;
-        this.account_number = account_number;
+        this.accountNumber = account_number;
         this.role = "USER" ;
     }
-	public String getAccount_number() {
-		return account_number;
+
+
+	
+
+
+	public String getAccountNumber() {
+		return accountNumber;
 	}
 
-	public void setAccount_number(String account_number) {
-		this.account_number = account_number;
+	public void setAccountNumber(String accountNumber) {
+		this.accountNumber = accountNumber;
 	}
 
+	public String getPhone() {
+		return phone;
+	}
 
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
 
 	public Long getId() {
 		return id;
