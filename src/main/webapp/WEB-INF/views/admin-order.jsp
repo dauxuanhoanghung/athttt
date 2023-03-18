@@ -69,11 +69,14 @@
 
 
 			<!-- Nav Item - Tables -->
-			<li class="nav-item active"><a class="nav-link" href="/admin"> <i
-					class="fas fa-fw fa-table"></i> <span>Sản phẩm</span></a></li>
+			<li class="nav-item active"><a class="nav-link" href="/admin">
+					<i class="fas fa-fw fa-table"></i> <span>Sản phẩm</span>
+			</a></li>
 
-			<li class="nav-item active"><a class="nav-link" href="/admin/order"> <i
-					class="fas fa-fw fa-table"></i> <span>Đơn hàng</span></a></li>
+			<li class="nav-item active"><a class="nav-link"
+				href="/admin/order"> <i class="fas fa-fw fa-table"></i> <span>Đơn
+						hàng</span></a></li>
+
 			<!-- Divider -->
 			<hr class="sidebar-divider d-none d-md-block" />
 
