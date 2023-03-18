@@ -40,7 +40,7 @@ public class ShopController {
 	BCryptPasswordEncoder bCryptPasswordEncoder;
 
 	@RequestMapping("/shop")
-	public String index(Model model, @RequestParam Map<String, Object> searchMap,
+	public String index(Model model, @RequestParam Map<String, String> searchMap,
 			@RequestParam(value = "page", defaultValue = "1", required = false) String page,
 			@RequestParam(value = "id", required = false) String id) {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

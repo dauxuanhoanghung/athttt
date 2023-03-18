@@ -29,7 +29,7 @@ public class ProductService {
 		return productRepository.getOne(id);
 	}
 
-	public List<Product> getProducts(Map<String, Object> searchMap, Integer page) {
+	public List<Product> getProducts(Map<String, String> searchMap, Integer page) {
 		Pageable pageable = PageRequest.of(page - 1, 9);
 		Page<Product> productPage = productRepository.findAll(pageable);
 		List<Product> productList = productPage.getContent();
@@ -40,4 +40,7 @@ public class ProductService {
 		return productRepository.save(product);
 	}
 
+	public List<Product> findByName(String name) {
+		return productRepository.findByName(name);
+	}
 }
