@@ -21,29 +21,32 @@
 			<!-- SIGN UP -->
 			<div class="col align-items-center flex-col sign-up">
 				<div class="form-wrapper align-items-center">
-					<form class="form sign-up" action="/register" method="post">
-						<% if (request.getParameter("register") != null && !request.getParameter("register").isEmpty()) { %>
-						<div style="position: relative; padding: 0.75rem 1.25rem; margin-bottom: 1rem; border: 1px solid transparent; color: #721c24; 
-						background-color: #f8d7da; border-color: #f5c6cb; border-radius: 0.25rem;"
-						class="alert alert-danger" role="alert">Sign up fail</div>
-						<%}%>
+					<form class="form sign-up" action="/register" method="post"
+						onsubmit="submitForm(event)">
+						<%
+							if (request.getParameter("register") != null && !request.getParameter("register").isEmpty()) {
+						%>
+						<div
+							style="position: relative; padding: 0.75rem 1.25rem; margin-bottom: 1rem; border: 1px solid transparent; color: #721c24; background-color: #f8d7da; border-color: #f5c6cb; border-radius: 0.25rem;"
+							class="alert alert-danger" role="alert">Sign up fail</div>
+						<%
+							}
+						%>
 						<div class="input-group">
 							<i class='bx bxs-user'></i> <input type="text" required
 								placeholder="Username" name="username">
 						</div>
 						<div class="input-group">
-							<i class='bx bx-mail-send'></i> <input type="email" 
+							<i class='bx bx-mail-send'></i> <input type="email"
 								placeholder="Email" name="email">
 						</div>
 						<div class="input-group">
-							<i class='bx bxs-lock-alt'></i> 
-							<input type="password" required
+							<i class='bx bxs-lock-alt'></i> <input type="password" required
 								pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
 								placeholder="Password" name="password">
 						</div>
 						<div class="input-group">
-							<i class='bx bxs-lock-alt'></i> 
-							<input type="password" required
+							<i class='bx bxs-lock-alt'></i> <input type="password" required
 								pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
 								placeholder="Confirm password" name="confirm">
 						</div>
@@ -88,12 +91,12 @@
 							}
 						%>
 						<div class="input-group">
-							<i class='bx bxs-user'></i> 
-							<input required type="text" placeholder="Username" name="username">
+							<i class='bx bxs-user'></i> <input required type="text"
+								placeholder="Username" name="username">
 						</div>
 						<div class="input-group">
-							<i class='bx bxs-lock-alt'></i> 
-							<input required type="password" name="password" placeholder="Password">
+							<i class='bx bxs-lock-alt'></i> <input required type="password"
+								name="password" placeholder="Password">
 						</div>
 						<button type="submit">Sign in</button>
 						<p>
@@ -157,14 +160,36 @@
 
 	<script src="<c:url value = "/js/login.js"/>"></script>
 	<script>
-	let form = document.querySelector("form.sign-up");
-	form.addEventListener("submit", (e) => {
-		e.preventDefault();
-		let passwordEnter = document.querySelector("form.sign-up input[type=password]");
-		let confirmPassword = document.querySelector("form.sign-up input[type=password][name=confirm]");
-		console.log(passwordEnter, confirmPassword);
-		let pw = passwordEnter.value;
-	})
+		let form = document.querySelector("form.sign-up");
+
+		document
+				.getElementById("btnSignUp")
+				.addEventListener(
+						"click",
+						function(event) {
+
+							event.preventDefault();
+
+							// Get the password and confirm password fields
+							let passwordEnter = document
+									.querySelector("form.sign-up input[type=password]");
+							let confirmPassword = document
+									.querySelector("form.sign-up input[type=password][name=confirm]");
+							const pattern = /^(?=.*[A-Z])(?=.*[a-z])(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+							// Check if the password and confirm password fields match
+							if (!pattern.test(passwordEnter.value)) {
+								alert("Passwords pattern ex: at least number, lowercase letter, uppercase letter and speical . Please try again. ");
+								return ;
+							}
+							if (passwordEnter.value === confirmPassword.value) {
+								// If the passwords match, submit the form programmatically
+								document.querySelector(".form.sign-up")
+										.submit();
+							} else {
+								// If the passwords do not match, display an error message
+								alert("Passwords do not match. Please try again. ");
+							}
+						});
 	</script>
 </body>
 

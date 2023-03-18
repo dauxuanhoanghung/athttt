@@ -40,6 +40,13 @@
 			            <%= success %>
 			        </div>
 			<%}%>
+			
+			<% String error = (String) request.getAttribute("error");
+		    if (error != null) { %>
+			        <div class="alert alert-danger col-md-12" role="alert">
+			            <%= error %>
+			        </div>
+			<%}%>
 			<div class="col-md-12 border-right">
 				<div class="p-3 py-5">
 					<div class="d-flex justify-content-between align-items-center mb-3">
