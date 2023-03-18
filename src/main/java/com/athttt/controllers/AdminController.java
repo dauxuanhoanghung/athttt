@@ -31,4 +31,6 @@ public class AdminController {
 		model.addAttribute("categories", categories);
 		return "admin-order";
 	}
+	
+
 }

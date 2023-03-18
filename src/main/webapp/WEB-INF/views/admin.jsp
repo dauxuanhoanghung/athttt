@@ -69,11 +69,13 @@
 
 
 			<!-- Nav Item - Tables -->
-			<li class="nav-item active"><a class="nav-link" href="/admin"> <i
-					class="fas fa-fw fa-table"></i> <span>Sản phẩm</span></a></li>
+			<li class="nav-item active"><a class="nav-link" href="/admin">
+					<i class="fas fa-fw fa-table"></i> <span>Sản phẩm</span>
+			</a></li>
 
-			<li class="nav-item active"><a class="nav-link" href="/admin/order"> <i
-					class="fas fa-fw fa-table"></i> <span>Đơn hàng</span></a></li>
+			<li class="nav-item active"><a class="nav-link"
+				href="/admin/order"> <i class="fas fa-fw fa-table"></i> <span>Đơn
+						hàng</span></a></li>
 			<!-- Divider -->
 			<hr class="sidebar-divider d-none d-md-block" />
 
@@ -185,9 +187,9 @@
 
 				<!-- Begin Page Content -->
 				<div class="container-fluid">
-					<form method="post" action="/add-product" class="mb-3">
+					<form method="post" action="/add-product" class="mb-3" enctype="application/x-www-form-urlencoded">
 						<div class="form-row" style="align-items: center;">
-							<div class="form-group col-md-4">
+							<div class="form-group col-md-4" >
 								<label for="inputEmail4">Tên sản phẩm</label> <input type="text"
 									required name="name" class="form-control" id="inputEmail4"
 									placeholder="Tên sản phẩm">
@@ -218,9 +220,9 @@
 							</div>
 						</div>
 						<div class="form-group col-md-12">
-							<label for="inputAddress">Address</label>
+							<label for="inputAddress">Mô tả</label>
 							<textarea required style="width: 100%; padding: 10px"
-								placeholder="Mô tả"></textarea>
+								name="description" placeholder="Mô tả"></textarea>
 						</div>
 						<div class="form-group">
 							<label for="inputAddress2">Link ảnh</label> <input type="text"
@@ -402,6 +404,7 @@
 
 	<!-- Page level custom scripts -->
 	<script src='<c:url value = "/js/datatables-demo.js" />'></script>
+
 
 </body>
 </html>
