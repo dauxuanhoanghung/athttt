@@ -43,11 +43,6 @@ public class ShopController {
 	public String index(Model model, @RequestParam Map<String, Object> searchMap,
 			@RequestParam(value = "page", defaultValue = "1", required = false) String page,
 			@RequestParam(value = "id", required = false) String id) {
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		if (authentication != null && authentication.isAuthenticated()) {
-			Users currentUser = userService.findUserByUsername(authentication.getName());
-			model.addAttribute("currentUser", currentUser);
-		}
 
 		long productCount = productService.count();
 		Long pages = (long) Math.ceil(productCount / 9.0);
@@ -69,21 +64,11 @@ public class ShopController {
 
 	@RequestMapping("/my-cart")
 	public String myCart(Model model) {
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		if (authentication != null && authentication.isAuthenticated()) {
-			Users currentUser = userService.findUserByUsername(authentication.getName());
-			model.addAttribute("currentUser", currentUser);
-		}
 		return "shopping-cart";
 	}
 
 	@RequestMapping("/checkout")
 	public String checkout(Model model) {
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		if (authentication != null && authentication.isAuthenticated()) {
-			Users currentUser = userService.findUserByUsername(authentication.getName());
-			model.addAttribute("currentUser", currentUser);
-		}
 		return "checkout";
 	}
 

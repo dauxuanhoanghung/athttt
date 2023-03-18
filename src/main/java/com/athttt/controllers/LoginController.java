@@ -93,9 +93,6 @@ public class LoginController {
 
 	@GetMapping("/profile")
 	public String showProfilePage(Model model) {
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		Users currentUser = userDetailsService.findUserByUsername(authentication.getName());
-		model.addAttribute("currentUser", currentUser);
 		return "profile";
 	}
 	
