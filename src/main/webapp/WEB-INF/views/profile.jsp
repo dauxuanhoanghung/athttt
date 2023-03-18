@@ -34,16 +34,12 @@
     <!-- Breadcrumb Section End -->
 	<div class="container rounded bg-white mt-5 mb-5">
 		<form class="row" action="/profile" method="post">
-		<%
-		    String success = (String) request.getAttribute("success");
-		    if (success != null) {
-			%>
+		<% String success = (String) request.getAttribute("success");
+		    if (success != null) { %>
 			        <div class="alert alert-success col-md-12" role="alert">
 			            <%= success %>
 			        </div>
-			<%
-			    }
-			%>
+			<%}%>
 			<div class="col-md-12 border-right">
 				<div class="p-3 py-5">
 					<div class="d-flex justify-content-between align-items-center mb-3">
@@ -62,15 +58,15 @@
 					<div class="row mt-2">
 						<div class="col-md-4">
 							<label class="labels">Current Password</label>
-							<input type="password" class="form-control" placeholder="Password" value="" name="currentPass">
+							<input type="password" class="form-control" placeholder="Old password..." value="" name="currentPass">
 						</div>
 						<div class="col-md-4">
 							<label class="labels">New Password</label>
-							<input type="password" class="form-control" value="" placeholder="Your name..." name="newPass">
+							<input type="password" class="form-control" value="" placeholder="Change password" name="newPass">
 						</div>
 						<div class="col-md-4">
 							<label class="labels">Confirm Password</label>
-							<input type="password" class="form-control" placeholder="first name" value="" name="confirmPass">
+							<input type="password" class="form-control" placeholder="Reenter to confirm yout new password..." value="" name="confirmPass">
 						</div>
 					</div>
 					
@@ -84,7 +80,7 @@
 								class="form-control" placeholder="" value="${ currentUser.address }" name="address">
 						</div>
 						<div class="col-md-6">
-							<label class="labels">Email ID</label><input type="text"
+							<label class="labels">Email</label><input type="text"
 								class="form-control" placeholder="${ currentUser.email }" value="${ currentUser.email }" name="email">
 						</div>
 						<div class="col-md-6">

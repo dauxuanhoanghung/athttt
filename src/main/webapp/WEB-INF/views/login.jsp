@@ -21,18 +21,12 @@
 			<!-- SIGN UP -->
 			<div class="col align-items-center flex-col sign-up">
 				<div class="form-wrapper align-items-center">
-
-
 					<form class="form sign-up" action="/register" method="post">
-						<%
-							if (request.getParameter("register") != null && !request.getParameter("register").isEmpty()) {
-						%>
-						<div
-							style="position: relative; padding: 0.75rem 1.25rem; margin-bottom: 1rem; border: 1px solid transparent; color: #721c24; background-color: #f8d7da; border-color: #f5c6cb; border-radius: 0.25rem;"
-							class="alert alert-danger" role="alert">Sign up fail</div>
-						<%
-							}
-						%>
+						<% if (request.getParameter("register") != null && !request.getParameter("register").isEmpty()) { %>
+						<div style="position: relative; padding: 0.75rem 1.25rem; margin-bottom: 1rem; border: 1px solid transparent; color: #721c24; 
+						background-color: #f8d7da; border-color: #f5c6cb; border-radius: 0.25rem;"
+						class="alert alert-danger" role="alert">Sign up fail</div>
+						<%}%>
 						<div class="input-group">
 							<i class='bx bxs-user'></i> <input type="text" required
 								placeholder="Username" name="username">
@@ -42,16 +36,18 @@
 								placeholder="Email" name="email">
 						</div>
 						<div class="input-group">
-							<i class='bx bxs-lock-alt'></i> <input type="password" required
+							<i class='bx bxs-lock-alt'></i> 
+							<input type="password" required
 								pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
 								placeholder="Password" name="password">
 						</div>
 						<div class="input-group">
-							<i class='bx bxs-lock-alt'></i> <input type="password" required
+							<i class='bx bxs-lock-alt'></i> 
+							<input type="password" required
 								pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
 								placeholder="Confirm password" name="confirm">
 						</div>
-						<button type="submit">Sign up</button>
+						<button type="submit" id="btnSignUp">Sign up</button>
 						<p>
 							<span> Already have an account? </span> <b onclick="toggle()"
 								class="pointer"> Sign in here </b>
@@ -92,13 +88,12 @@
 							}
 						%>
 						<div class="input-group">
-							<i class='bx bxs-user'></i> <input required type="text" 
-								placeholder="Username" name="username">
+							<i class='bx bxs-user'></i> 
+							<input required type="text" placeholder="Username" name="username">
 						</div>
 						<div class="input-group">
-							<i class='bx bxs-lock-alt'></i> <input required type="password"
-								name="password" placeholder="Password" 
-								>
+							<i class='bx bxs-lock-alt'></i> 
+							<input required type="password" name="password" placeholder="Password">
 						</div>
 						<button type="submit">Sign in</button>
 						<p>
@@ -161,6 +156,16 @@
 	</div>
 
 	<script src="<c:url value = "/js/login.js"/>"></script>
+	<script>
+	let form = document.querySelector("form.sign-up");
+	form.addEventListener("submit", (e) => {
+		e.preventDefault();
+		let passwordEnter = document.querySelector("form.sign-up input[type=password]");
+		let confirmPassword = document.querySelector("form.sign-up input[type=password][name=confirm]");
+		console.log(passwordEnter, confirmPassword);
+		let pw = passwordEnter.value;
+	})
+	</script>
 </body>
 
 </html>
