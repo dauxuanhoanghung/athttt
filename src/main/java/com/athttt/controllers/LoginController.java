@@ -42,7 +42,7 @@ public class LoginController {
 
 	@PostMapping("/authenticate")
 	public String authenticate(@RequestBody String username, @RequestBody String password, HttpSession session,
-			RedirectAttributes redirectAttributes) {	
+			RedirectAttributes redirectAttributes) {
 		username = UriUtils.decode(username, StandardCharsets.UTF_8);
 		System.out.println(username);
 		password = username.substring(username.lastIndexOf("=") + 1);
@@ -58,20 +58,19 @@ public class LoginController {
 			// load user details from UserDetailsService
 			UserDetails userDetails = userDetailsService.loadUserByUsername(username);
 
-
-			
 			// set user details in session
 			session.setAttribute("userDetails", userDetails);
-		    boolean isAdmin = userDetails.getAuthorities().stream()
-		            .anyMatch(authority -> authority.getAuthority().equals("ROLE_ADMIN")  || authority.getAuthority().equals("ADMIN"));
-		    // debug statement to check authorities
-		    System.out.println("User authorities: " + userDetails.getAuthorities());
-		    // redirect to appropriate page based on user role
-		    if (isAdmin) {
-		        return "redirect:/admin";
-		    } else {
-		        return "redirect:/shop";
-		    }
+			boolean isAdmin = userDetails.getAuthorities().stream()
+					.anyMatch(authority -> authority.getAuthority().equals("ROLE_ADMIN")
+							|| authority.getAuthority().equals("ADMIN"));
+			// debug statement to check authorities
+			System.out.println("User authorities: " + userDetails.getAuthorities());
+			// redirect to appropriate page based on user role
+			if (isAdmin) {
+				return "redirect:/admin";
+			} else {
+				return "redirect:/shop";
+			}
 
 		} catch (BadCredentialsException e) {
 			redirectAttributes.addFlashAttribute("error", "Invalid username or password");
@@ -85,15 +84,19 @@ public class LoginController {
 	}
 
 	@PostMapping("/register")
-	public String registerHandler(@RequestBody String info, HttpServletRequest http) {		
+	public String registerHandler(@RequestBody String info, HttpServletRequest http) {
 		Map<String, String> infos = this.splitResquestBody(info);
+		if (!infos.get("password").equals(infos.get("confirm"))) {
+			return "redirect:/login?register=true";
+		}
+
 		Users u = userDetailsService.findUserByUsername(infos.getOrDefault("username", null));
 		if (u != null) {
 			System.out.println(u.getUsername());
 			return "redirect:/login?register=true";
 		} else {
-			Users newUsers = new Users(null, infos.get("username"), infos.get("password"), 1,
-					infos.get("username"), infos.get("account_number"), "USER", null, null);
+			Users newUsers = new Users(null, infos.get("username"), infos.get("password"), 1, infos.get("username"),
+					infos.get("account_number"), "USER", null, null);
 			userDetailsService.insert(newUsers);
 		}
 		return "redirect:/login";
@@ -103,19 +106,27 @@ public class LoginController {
 	public String showProfilePage(Model model) {
 		return "profile";
 	}
-	
+
 	@PostMapping("/profile")
 	public String updateProfile(@RequestBody(required = false) String res, Model model) {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		Users currentUser = userDetailsService.findUserByUsername(authentication.getName());
 		model.addAttribute("currentUser", currentUser);
-		model.addAttribute("success", "Update your information successful !!!");
 		Map<String, String> infos = this.splitResquestBody(res);
-		infos.put("id", currentUser.getId().toString());
-		currentUser = userDetailsService.updateUsers(infos);
+		if (!infos.get("newPass").equals(infos.get("confirmPass")) || infos.get("newPass").isEmpty()
+				|| infos.get("confirmPass").isEmpty()
+				|| !bCryptPasswordEncoder.matches(infos.get("currentPass"), currentUser.getPassword())) {
+			model.addAttribute("error", "Password không khớp");
+		} else {
+			model.addAttribute("success", "Update your information successful !!!");
+			infos.put("id", currentUser.getId().toString());
+			currentUser = userDetailsService.updateUsers(infos);
+		}
+			
+		
 		return "profile";
 	}
-	
+
 	private Map<String, String> splitResquestBody(String res) {
 		if (res != null) {
 			res = UriUtils.decode(res, StandardCharsets.UTF_8).replace("+", " ");
