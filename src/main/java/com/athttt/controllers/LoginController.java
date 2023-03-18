@@ -117,10 +117,13 @@ public class LoginController {
 				|| infos.get("confirmPass").isEmpty()
 				|| !bCryptPasswordEncoder.matches(infos.get("currentPass"), currentUser.getPassword())) {
 			model.addAttribute("error", "Password không khớp");
-		} else
+		} else {
 			model.addAttribute("success", "Update your information successful !!!");
-		infos.put("id", currentUser.getId().toString());
-		currentUser = userDetailsService.updateUsers(infos);
+			infos.put("id", currentUser.getId().toString());
+			currentUser = userDetailsService.updateUsers(infos);
+		}
+			
+		
 		return "profile";
 	}
 

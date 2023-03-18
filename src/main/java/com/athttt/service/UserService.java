@@ -25,7 +25,7 @@ public class UserService implements UserDetailsService {
 
 	@Autowired
 	BCryptPasswordEncoder bCryptPasswordEncoder;
-	
+
 	public Users findUserById(Long id) {
 		return userRepository.getOne(id);
 	}
@@ -38,9 +38,12 @@ public class UserService implements UserDetailsService {
 	public List<Users> getAll() {
 		return userRepository.findAll();
 	}
-	
+
 	public Users updateUsers(Map<String, String> info) {
 		Users currentUser = userRepository.findById(Long.parseLong(info.get("id"))).get();
+		if (!bCryptPasswordEncoder.matches(info.get("password"), currentUser.getPassword())) {
+			currentUser.setPassword(bCryptPasswordEncoder.encode(info.get("password")));
+		}
 		currentUser.setEmail(info.get("email"));
 		currentUser.setPhone(info.get("phone"));
 		currentUser.setFullname(info.get("fullname"));
@@ -49,10 +52,11 @@ public class UserService implements UserDetailsService {
 		userRepository.save(currentUser);
 		return currentUser;
 	}
-	
+
 	public Users findUserByUsername(String username) {
 		return userRepository.findByUsername(username);
 	}
+
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		Users u = userRepository.findByUsername(username);
@@ -61,11 +65,9 @@ public class UserService implements UserDetailsService {
 		}
 
 		Set<GrantedAuthority> authorities = new HashSet<>();
-		authorities.add(new SimpleGrantedAuthority("ROLE_"+ u.getRole()));
+		authorities.add(new SimpleGrantedAuthority("ROLE_" + u.getRole()));
 
 		return new org.springframework.security.core.userdetails.User(u.getUsername(), u.getPassword(), authorities);
 	}
-	
-
 
 }
