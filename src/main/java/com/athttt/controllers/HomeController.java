@@ -27,7 +27,7 @@ public class HomeController {
 	    }
 	}
 	
-	@RequestMapping("/")
+	@RequestMapping(path= { "/", "/home", "trang-chu" })
 	public String index(Model model) {
 		return "index";
 	}

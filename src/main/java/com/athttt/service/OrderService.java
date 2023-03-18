@@ -1,5 +1,7 @@
 package com.athttt.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -50,5 +52,9 @@ public class OrderService {
 		}
 		saleOrder.setSubtotal(subtotal);
 		saleOrderRepository.save(saleOrder);
+	}
+	
+	public List<Saleorder> getAllOrder() {
+		return this.saleOrderRepository.findAll();
 	}
 }

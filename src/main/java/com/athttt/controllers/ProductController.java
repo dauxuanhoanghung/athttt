@@ -39,14 +39,12 @@ public class ProductController {
 			newProduct.setQuantity(Integer.valueOf(formMap.getOrDefault("quantity", null)));
 
 			Product result = productService.save(newProduct);
-
+			
 			if (result != null) {
 				return "success";
 			}
-			
 			return "fail";
 		}
-
 		return "fail";
 	}
 	private Map<String, String> splitResquestBody(String res) {

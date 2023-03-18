@@ -5,6 +5,7 @@
 package com.athttt.entity;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -55,9 +56,20 @@ public class Saleorder implements Serializable {
 	// consider using these annotations to enforce field validation
 	@Column(name = "subtotal")
 	private Float subtotal;
-	@Column(name = "createdDate")
+	@Column(name = "created_date")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date createdDate;
+
+	@Column(name = "is_shipped")
+	private boolean shipped;
+
+	public boolean isShipped() {
+		return shipped;
+	}
+
+	public void setShipped(boolean shipped) {
+		this.shipped = shipped;
+	}
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "orderId")
 	private List<Saleorderdetails> saleorderdetailsList;
@@ -67,6 +79,8 @@ public class Saleorder implements Serializable {
 
 	{
 		this.code = UUID.randomUUID().toString();
+		long millis = System.currentTimeMillis();  
+	    this.createdDate = new Date(millis);       
 	}
 
 	public Saleorder() {
