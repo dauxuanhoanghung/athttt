@@ -87,13 +87,7 @@ public class ShopController {
 		return "checkout";
 	}
 
-	@RequestMapping("/my-register")
-	public String getRegister() {
-		Users newUser = new Users(null, "Hùng vip", "123456", 1, "hung12", "0123456465");
-		userService.insert(newUser);
-		System.out.println("HHEEEE");
-		return "redirect:/";
-	}
+
 
 
 }

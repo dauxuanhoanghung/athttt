@@ -26,11 +26,4 @@ public class HomeController {
 		return "index";
 	}
 
-//	@RequestMapping("/welcome")
-//	public String wel() {
-//		return "welcome";
-//	}
-
-
-	
 }
