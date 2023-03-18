@@ -76,6 +76,7 @@
 			<li class="nav-item active"><a class="nav-link"
 				href="/admin/order"> <i class="fas fa-fw fa-table"></i> <span>Đơn
 						hàng</span></a></li>
+
 			<!-- Divider -->
 			<hr class="sidebar-divider d-none d-md-block" />
 
@@ -187,8 +188,7 @@
 
 				<!-- Begin Page Content -->
 				<div class="container-fluid">
-					<form method="post" action="/add-product" class="mb-3"
-						enctype="application/x-www-form-urlencoded">
+					<form method="post" action="/add-product" class="mb-3">
 						<div class="form-row" style="align-items: center;">
 							<div class="form-group col-md-4">
 								<label for="inputEmail4">Tên sản phẩm</label> <input type="text"
@@ -221,17 +221,17 @@
 							</div>
 						</div>
 						<div class="form-group col-md-12">
-							<label for="inputAddress">Mô tả</label>
+							<label for="inputAddress">Address</label>
 							<textarea required style="width: 100%; padding: 10px"
-								name="description" placeholder="Mô tả"></textarea>
+								placeholder="Mô tả"></textarea>
 						</div>
 						<div class="form-group">
 							<label for="inputAddress2">Link ảnh</label> <input type="text"
 								name="thumbnail" class="form-control" id="inputAddress2"
 								placeholder="Apartment, studio, or floor">
 						</div>
-						<button type="submit" class="btn btn-primary ml-auto">Thêm
-							sản phẩm</button>
+						<button type="submit" class="btn btn-primary ml-auto">Sign
+							in</button>
 					</form>
 
 
@@ -244,15 +244,6 @@
 							<h6 class="m-0 font-weight-bold text-primary">DataTables
 								Example</h6>
 						</div>
-						<form action = "/admin">
-							<div class="form-group col-md-2">
-								<label for="exampleInputEmail1">Search: </label> <input
-									type="text" class="form-control" id="exampleInputEmail1"
-									aria-describedby="emailHelp" placeholder="ex: Túi.." name = "name">
-								<small id="emailHelp" class="form-text text-muted">We'll
-									never share your email with anyone else.</small>
-							</div>
-						</form>
 						<div class="card-body">
 							<div class="table-responsive">
 								<table class="table table-bordered" id="dataTable" width="100%"
@@ -260,29 +251,83 @@
 									<thead>
 										<tr>
 											<th>Name</th>
-											<th>Description</th>
-											<th>Price</th>
-											<th>Supplier</th>
-											<th>Quantity</th>
-											<th>Price</th>
+											<th>Position</th>
+											<th>Office</th>
+											<th>Age</th>
+											<th>Start date</th>
+											<th>Salary</th>
 										</tr>
 									</thead>
 									<tfoot>
-										<c:forEach begin="1" end="${totalPage}" var="p">
-											<a href="?page=${p}">${p}</a>
-										</c:forEach>
+										<tr>
+											<th>Name</th>
+											<th>Position</th>
+											<th>Office</th>
+											<th>Age</th>
+											<th>Start date</th>
+											<th>Salary</th>
+										</tr>
 									</tfoot>
 									<tbody>
-										<c:forEach var="p" items="${products}">
-											<tr>
-												<td>${p.name}</td>
-												<td>${p.description }</td>
-												<td>${p.price}</td>
-												<td>${p.supplier}</td>
-												<td>${p.quantity }</td>
-												<td>${p.price }</td>
-											</tr>
-										</c:forEach>
+
+
+										<tr>
+											<td>Michael Silva</td>
+											<td>Marketing Designer</td>
+											<td>London</td>
+											<td>66</td>
+											<td>2012/11/27</td>
+											<td>$198,500</td>
+										</tr>
+										<tr>
+											<td>Paul Byrd</td>
+											<td>Chief Financial Officer (CFO)</td>
+											<td>New York</td>
+											<td>64</td>
+											<td>2010/06/09</td>
+											<td>$725,000</td>
+										</tr>
+										<tr>
+											<td>Gloria Little</td>
+											<td>Systems Administrator</td>
+											<td>New York</td>
+											<td>59</td>
+											<td>2009/04/10</td>
+											<td>$237,500</td>
+										</tr>
+										<tr>
+											<td>Bradley Greer</td>
+											<td>Software Engineer</td>
+											<td>London</td>
+											<td>41</td>
+											<td>2012/10/13</td>
+											<td>$132,000</td>
+										</tr>
+										<tr>
+											<td>Dai Rios</td>
+											<td>Personnel Lead</td>
+											<td>Edinburgh</td>
+											<td>35</td>
+											<td>2012/09/26</td>
+											<td>$217,500</td>
+										</tr>
+										<tr>
+											<td>Jenette Caldwell</td>
+											<td>Development Lead</td>
+											<td>New York</td>
+											<td>30</td>
+											<td>2011/09/03</td>
+											<td>$345,000</td>
+										</tr>
+										<tr>
+											<td>Yuri Berry</td>
+											<td>Chief Marketing Officer (CMO)</td>
+											<td>New York</td>
+											<td>40</td>
+											<td>2009/06/25</td>
+											<td>$675,000</td>
+										</tr>
+
 									</tbody>
 								</table>
 							</div>
@@ -360,15 +405,6 @@
 
 	<!-- Page level custom scripts -->
 	<script src='<c:url value = "/js/datatables-demo.js" />'></script>
-
-
-	​
-	<script type="text/javascript">
-		setTimeout(()=> {
-			document.querySelector(".pagination").style.display = 'none';
-			document.querySelector("#dataTable_filter").style.display = 'none';
-		}, 200) 
-	</script>
 
 </body>
 </html>

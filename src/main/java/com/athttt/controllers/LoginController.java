@@ -47,9 +47,6 @@ public class LoginController {
 		System.out.println(username);
 		password = username.substring(username.lastIndexOf("=") + 1);
 		username = username.substring(username.indexOf("=") + 1, username.indexOf("&"));
-		System.out.println(username);
-		System.out.println(password);
-//		return "index";
 		try {
 			// authenticate user
 			Authentication authentication = authenticationManager
@@ -61,10 +58,21 @@ public class LoginController {
 			// load user details from UserDetailsService
 			UserDetails userDetails = userDetailsService.loadUserByUsername(username);
 
+
+			
 			// set user details in session
 			session.setAttribute("userDetails", userDetails);
+		    boolean isAdmin = userDetails.getAuthorities().stream()
+		            .anyMatch(authority -> authority.getAuthority().equals("ROLE_ADMIN")  || authority.getAuthority().equals("ADMIN"));
+		    // debug statement to check authorities
+		    System.out.println("User authorities: " + userDetails.getAuthorities());
+		    // redirect to appropriate page based on user role
+		    if (isAdmin) {
+		        return "redirect:/admin";
+		    } else {
+		        return "redirect:/shop";
+		    }
 
-			return "redirect:/";
 		} catch (BadCredentialsException e) {
 			redirectAttributes.addFlashAttribute("error", "Invalid username or password");
 			return "redirect:/login";

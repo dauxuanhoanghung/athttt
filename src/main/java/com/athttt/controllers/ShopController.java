@@ -40,7 +40,7 @@ public class ShopController {
 	BCryptPasswordEncoder bCryptPasswordEncoder;
 
 	@RequestMapping("/shop")
-	public String index(Model model, @RequestParam Map<String, Object> searchMap,
+	public String index(Model model, @RequestParam Map<String, String> searchMap,
 			@RequestParam(value = "page", defaultValue = "1", required = false) String page,
 			@RequestParam(value = "id", required = false) String id) {
 
@@ -72,13 +72,7 @@ public class ShopController {
 		return "checkout";
 	}
 
-	@RequestMapping("/my-register")
-	public String getRegister() {
-		Users newUser = new Users(null, "Hùng vip", "123456", 1, "hung12", "0123456465");
-		userService.insert(newUser);
-		System.out.println("HHEEEE");
-		return "redirect:/";
-	}
+
 
 
 }
