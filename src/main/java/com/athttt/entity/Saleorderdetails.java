@@ -54,7 +54,7 @@ public class Saleorderdetails implements Serializable {
     private Float unitprice;
     @Column(name = "unitquantity")
     private Integer unitquantity;
-    @Column(name = "createdDate")
+    @Column(name = "created_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdDate;
     @JoinColumn(name = "product_id", referencedColumnName = "id")
@@ -64,6 +64,10 @@ public class Saleorderdetails implements Serializable {
     @ManyToOne(optional = false)
     private Saleorder orderId;
 
+    {
+    	long millis = System.currentTimeMillis();  
+	    this.createdDate = new Date(millis);     
+    }
     public Saleorderdetails() {
     }
 

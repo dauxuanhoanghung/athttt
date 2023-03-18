@@ -11,17 +11,22 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.athttt.entity.Category;
 import com.athttt.entity.Product;
+import com.athttt.entity.Saleorder;
 import com.athttt.service.CategoryService;
+import com.athttt.service.OrderService;
 import com.athttt.service.ProductService;
 
 @Controller
 public class AdminController {
 
 	@Autowired
-	CategoryService categoryService;
+	private CategoryService categoryService;
 
 	@Autowired
-	ProductService productService;
+	private ProductService productService;
+	
+	@Autowired
+	private OrderService saleOrderService;
 
 	@RequestMapping("/admin")
 	public String getAdmin(Model model, 
@@ -42,9 +47,8 @@ public class AdminController {
 
 	@RequestMapping("/admin/order")
 	public String getOrder(Model model) {
-		System.out.println("ABCDEF");
-		List<Category> categories = categoryService.getAll();
-		model.addAttribute("categories", categories);
+		List<Saleorder> orderList = this.saleOrderService.getAllOrder();
+		model.addAttribute("orderList", orderList);
 		return "admin-order";
 	}
 

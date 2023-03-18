@@ -45,7 +45,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.formLogin()
 				.loginPage("/login")
 				.passwordParameter("password").usernameParameter("username")
-				.loginProcessingUrl("/authenticate").defaultSuccessUrl("/").failureUrl("/login?error=true").permitAll()
+				.loginProcessingUrl("/authenticate")
+				.defaultSuccessUrl("/")
+				.successHandler(new CustomAuthenticationSuccessHandler())
+				.failureUrl("/login?error=true").permitAll()
 				.and()
 				.logout()
 				.logoutUrl("/logout")
@@ -56,9 +59,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.cors().disable();
 	}
 
-	@Autowired
-	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-		auth.inMemoryAuthentication().withUser("user").password("{noop}password").roles("USER").and().withUser("admin")
-				.password("{noop}password").roles("ADMIN");
-	}
+	
 }
