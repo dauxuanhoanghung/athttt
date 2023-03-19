@@ -72,7 +72,10 @@ public class ShopController {
 		return "checkout";
 	}
 
-
+	@RequestMapping("/payment")
+	public String payment(Model model) {
+		return "payment";
+	}
 
 
 }
