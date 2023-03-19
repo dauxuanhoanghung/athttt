@@ -48,66 +48,77 @@
 	<section class="checkout spad">
 		<div class="container">
 			<div class="checkout__form">
-				<form class="form_product" action="/order" method="post">
+				<form class="form_product" action="/payment" method="post">
 					<div class="row">
-		<div class="col-lg-8 col-md-6">
-                            <h6 class="coupon__code"><span class="icon_tag_alt"></span> Have a coupon? <a href="#">Click
-                            here</a> to enter your code</h6>
-                            <h6 class="checkout__title">Billing Details</h6>
-                            <div class="col-lg-12">
-                                <div class="checkout__input">
-                                    <p>Full Name<span>*</span></p>
-                                    <input type="text" value="${ currentUser.fullname }">
-                                </div>
-                            </div>
-                            <div class="checkout__input">
-                                <p>Address<span>*</span></p>
-                                <input type="text" placeholder="Street Address" class="checkout__input__add" 
-                                		value="${ currentUser.address }"
-                                		name="address">
-                            </div>                            
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="checkout__input">
-                                        <p>Phone<span>*</span></p>
-                                        <input type="text" name="phone"
-                                        value="${ currentUser.phone }">
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="checkout__input">
-                                        <p>Email<span>*</span></p>
-                                        <input type="email" name="email"
-                                        value="${ currentUser.email }">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="checkout__input__checkbox">
-                                <label for="acc">
-                                    Create an account?
-                                    <input type="checkbox" id="acc">
-                                    <span class="checkmark"></span>
-                                </label>
-                                <p>Create an account by entering the information below. If you are a returning customer
-                                please login at the top of the page</p>
-                            </div>
-                            <div class="checkout__input">
-                                <p>Account Password<span>*</span></p>
-                                <input type="text">
-                            </div>
-                            <div class="checkout__input__checkbox">
-                                <label for="diff-acc">
-                                    Note about your order, e.g, special noe for delivery
-                                    <input type="checkbox" id="diff-acc">
-                                    <span class="checkmark"></span>
-                                </label>
-                            </div>
-                            <div class="checkout__input">
-                                <p>Order notes<span>*</span></p>
-                                <input type="text"
-                                placeholder="Notes about your order, e.g. special notes for delivery.">
-                            </div>
-                        </div>
+						<div class="col-lg-8 col-md-6">
+							<h6 class="coupon__code">
+								<span class="icon_tag_alt"></span> Have a coupon? <a href="#">Click
+									here</a> to enter your code
+							</h6>
+							<h6 class="checkout__title">Billing Details</h6>
+							<div class="col-lg-12">
+								<div class="checkout__input">
+									<p>
+										Full Name<span>*</span>
+									</p>
+									<input type="text" value="${ currentUser.fullname }">
+								</div>
+							</div>
+							<div class="checkout__input">
+								<p>
+									Address<span>*</span>
+								</p>
+								<input type="text" placeholder="Street Address"
+									class="checkout__input__add" value="${ currentUser.address }"
+									name="address">
+							</div>
+							<div class="row">
+								<div class="col-lg-6">
+									<div class="checkout__input">
+										<p>
+											Phone<span>*</span>
+										</p>
+										<input type="text" name="phone" value="${ currentUser.phone }">
+									</div>
+								</div>
+								<div class="col-lg-6">
+									<div class="checkout__input">
+										<p>
+											Email<span>*</span>
+										</p>
+										<input type="email" name="email"
+											value="${ currentUser.email }">
+									</div>
+								</div>
+							</div>
+							<div class="checkout__input__checkbox">
+								<label for="acc"> Create an account? <input
+									type="checkbox" id="acc"> <span class="checkmark"></span>
+								</label>
+								<p>Create an account by entering the information below. If
+									you are a returning customer please login at the top of the
+									page</p>
+							</div>
+							<div class="checkout__input">
+								<p>
+									Account Password<span>*</span>
+								</p>
+								<input type="text">
+							</div>
+							<div class="checkout__input__checkbox">
+								<label for="diff-acc"> Note about your order, e.g,
+									special noe for delivery <input type="checkbox" id="diff-acc">
+									<span class="checkmark"></span>
+								</label>
+							</div>
+							<div class="checkout__input">
+								<p>
+									Order notes<span>*</span>
+								</p>
+								<input type="text"
+									placeholder="Notes about your order, e.g. special notes for delivery.">
+							</div>
+						</div>
 
 
 
@@ -163,6 +174,7 @@
 	<script>
 	
 	const form = document.querySelector(".form_product")
+	const button = document.querySelector(".form_product button")
 	
 	form.addEventListener("submit", (e) => {
 		e.preventDefault()
@@ -172,41 +184,19 @@
 				    quantity: item.quantity,
 				  };
 		});
-	 	fetch("http://localhost:8080/order", {
-			    method: "POST",
-			    headers: {
+	 
+		fetch("http://localhost:8080/payment", {
+			method: "post",
+			headers: {
 			      "Content-Type": "application/json"
 			    },
-			    body: JSON.stringify({products: ids_product, userID: ${currentUser.id} })
-		  }).then((res) => {
-			  console.log(res.status==200);
-			  let cont = document.querySelector("body > section.checkout.spad").innerHTML;
-			  if (res.status==200) {
-			  let html = `
-			  <div class = "container">
-		  	<div style = "text-align: center;max-width: 300px ;margin-left: auto;" class="alert alert-success col-md-12" role="alert">
-	          	Thanh toán thành công !
-	        </div>
-	        </div>`;
-	        document.querySelector("body > section.checkout.spad").innerHTML = html + cont;
-			  localStorage.removeItem("listItem");
-			  
-			  setTimeout(() => {
-				 window.location.href = "http://localhost:8080/shop";
-			  }, 1000)
-			  }
-			  else {
-				  let html = `
-					  <div class = "container">
-				  	<div style = "text-align: center;max-width: 300px ;margin-left: auto;" class="alert alert-danger col-md-12" role="alert">
-			          	Failed sml
-			        </div>
-			        </div>`;
-			        document.querySelector("body > section.checkout.spad").innerHTML = html + cont;
-			  }
+		    body: JSON.stringify( ids_product)
+		})
 		
-		  });
-		
+		setTimeout(()=> {
+			window.location.href = "http://localhost:8080/payment-test";
+		}, 200)
+
 	})
 	
     document.addEventListener("DOMContentLoaded", function() {
