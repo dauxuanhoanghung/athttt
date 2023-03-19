@@ -28,6 +28,7 @@ import org.springframework.web.util.UriUtils;
 
 import com.athttt.entity.Users;
 import com.athttt.service.UserService;
+import com.athttt.utils.VigenereCipher;
 
 @Controller
 public class LoginController {
@@ -96,7 +97,7 @@ public class LoginController {
 			return "redirect:/login?register=true";
 		} else {
 			Users newUsers = new Users(null, infos.get("username"), infos.get("password"), 1, infos.get("username"),
-					infos.get("account_number"), "USER", null, null);
+					infos.get("account_number"), "USER", null, null, infos.get("email"));
 			userDetailsService.insert(newUsers);
 		}
 		return "redirect:/login";
@@ -104,6 +105,15 @@ public class LoginController {
 
 	@GetMapping("/profile")
 	public String showProfilePage(Model model) {
+
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		Users currentUser = userDetailsService.findUserByUsername(authentication.getName());
+		if (currentUser.getAccountNumber() != null && !currentUser.getAccountNumber().isEmpty()) {
+			currentUser.setAccountNumber(
+					VigenereCipher.decrypt(currentUser.getAccountNumber(), currentUser.getUsername()));
+		}
+		model.addAttribute("currentUser", currentUser);
+
 		return "profile";
 	}
 
@@ -113,17 +123,36 @@ public class LoginController {
 		Users currentUser = userDetailsService.findUserByUsername(authentication.getName());
 		model.addAttribute("currentUser", currentUser);
 		Map<String, String> infos = this.splitResquestBody(res);
-		if (!infos.get("newPass").equals(infos.get("confirmPass")) || infos.get("newPass").isEmpty()
-				|| infos.get("confirmPass").isEmpty()
-				|| !bCryptPasswordEncoder.matches(infos.get("currentPass"), currentUser.getPassword())) {
-			model.addAttribute("error", "Password không khớp");
-		} else {
+		if (!infos.get("newPass").isEmpty() && !infos.get("confirmPass").isEmpty()
+				&& !infos.get("currentPass").isEmpty()) { // có nhập cả 3
+			if (!infos.get("newPass").equals(infos.get("confirmPass"))
+					|| !bCryptPasswordEncoder.matches(infos.get("currentPass"), currentUser.getPassword())) {
+				model.addAttribute("error", "Password không khớp");
+			} else {
+				model.addAttribute("success", "Update your information successful !!!");
+				infos.put("id", currentUser.getId().toString());
+				currentUser = userDetailsService.updateUsers(infos);
+				if (currentUser.getAccountNumber() != null && !currentUser.getAccountNumber().isEmpty()) {
+					System.out.println("username:" + currentUser.getUsername());
+					System.out.println("account:" + currentUser.getAccountNumber());
+					currentUser.setAccountNumber(
+							VigenereCipher.decrypt(currentUser.getAccountNumber(), currentUser.getUsername()));
+				}
+			}
+		} else if (infos.get("newPass").isEmpty() && infos.get("confirmPass").isEmpty()
+				&& infos.get("currentPass").isEmpty()) {
 			model.addAttribute("success", "Update your information successful !!!");
 			infos.put("id", currentUser.getId().toString());
 			currentUser = userDetailsService.updateUsers(infos);
+			if (currentUser.getAccountNumber() != null && !currentUser.getAccountNumber().isEmpty()) {
+				System.out.println("username:" + currentUser.getUsername());
+				System.out.println("account:" + currentUser.getAccountNumber());
+				currentUser.setAccountNumber(
+						VigenereCipher.decrypt(currentUser.getAccountNumber(), currentUser.getUsername()));
+			}
+		} else {
+			model.addAttribute("error", "Các field password cần đều phải nhập");
 		}
-			
-		
 		return "profile";
 	}
 
