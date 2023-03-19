@@ -16,12 +16,15 @@ import org.springframework.stereotype.Service;
 
 import com.athttt.entity.Users;
 import com.athttt.repository.UserRepository;
+import com.athttt.utils.VigenereCipher;
 
 @Service
 public class UserService implements UserDetailsService {
 	@Autowired
 	UserRepository userRepository;
+	
 
+	
 	@Autowired
 	BCryptPasswordEncoder bCryptPasswordEncoder;
 
@@ -40,14 +43,18 @@ public class UserService implements UserDetailsService {
 
 	public Users updateUsers(Map<String, String> info) {
 		Users currentUser = userRepository.findById(Long.parseLong(info.get("id"))).get();
-		if (!bCryptPasswordEncoder.matches(info.get("password"), currentUser.getPassword())) {
-			currentUser.setPassword(bCryptPasswordEncoder.encode(info.get("password")));
+		if (info.get("currentPass") != null && !info.get("currentPass").isEmpty()) {
+			if (bCryptPasswordEncoder.matches(info.get("currentPass"), currentUser.getPassword())) {
+				currentUser.setPassword(bCryptPasswordEncoder.encode(info.get("newPass")));
+			}
 		}
 		currentUser.setEmail(info.get("email"));
 		currentUser.setPhone(info.get("phone"));
 		currentUser.setFullname(info.get("fullname"));
 		currentUser.setAddress(info.get("address"));
-		currentUser.setAccountNumber(info.get("account_number"));
+		if (info.get("account_number") != null & !info.get("account_number").isEmpty())
+			
+		currentUser.setAccountNumber(VigenereCipher.encrypt(info.get("account_number"), currentUser.getUsername()) );
 		userRepository.save(currentUser);
 		return currentUser;
 	}

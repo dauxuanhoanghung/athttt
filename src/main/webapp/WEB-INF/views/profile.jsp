@@ -69,7 +69,9 @@
 						</div>
 						<div class="col-md-4">
 							<label class="labels">New Password</label>
-							<input type="password" class="form-control" value="" placeholder="Change password" name="newPass">
+							<input type="password"
+							pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
+							 class="form-control" value="" placeholder="Change password" name="newPass">
 						</div>
 						<div class="col-md-4">
 							<label class="labels">Confirm Password</label>

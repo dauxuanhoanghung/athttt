@@ -1,6 +1,6 @@
 package com.athttt.utils;
 
-public class VigenereCipher {
+public class VigenereCipher {	//Mã hóa bằng thuật toán vigenere
 	public static String encrypt(String text, final String key) {
 		String res = "";
 		for (int i = 0; i < text.length(); i++) {

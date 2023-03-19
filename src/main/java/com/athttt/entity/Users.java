@@ -119,7 +119,7 @@ public class Users implements Serializable {
 	}
 
 	public Users(Long id, String fullname, String password, int status, String username, String account_number, String role
-			, String address, String phone) {
+			, String address, String phone, String email) {
         this.id = id;
         this.fullname = fullname;
         this.password = password;
@@ -129,6 +129,7 @@ public class Users implements Serializable {
         this.address = address;
         this.phone = phone;
         this.role = role.equals("ADMIN") ? "ADMIN" : "USER" ;
+        this.email = email;
     }
 	public Users(Long id, String fullname, String password, int status, String username, String account_number) {
         this.id = id;
