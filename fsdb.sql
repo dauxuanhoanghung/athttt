@@ -2,7 +2,7 @@ CREATE DATABASE  IF NOT EXISTS `springbootweb` /*!40100 DEFAULT CHARACTER SET ut
 USE `springbootweb`;
 -- MySQL dump 10.13  Distrib 8.0.28, for Win64 (x86_64)
 --
--- Host: 127.0.0.1    Database: springbootweb
+-- Host: localhost    Database: springbootweb
 -- ------------------------------------------------------
 -- Server version	8.0.28
 
@@ -159,7 +159,7 @@ CREATE TABLE `saleorder` (
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   CONSTRAINT `saleorder_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -168,7 +168,7 @@ CREATE TABLE `saleorder` (
 
 LOCK TABLES `saleorder` WRITE;
 /*!40000 ALTER TABLE `saleorder` DISABLE KEYS */;
-INSERT INTO `saleorder` VALUES (1,'2b7420c3-37e5-4ed3-a21c-58fbbd808372',84.37,2,'2023-03-17 17:20:24',_binary '\0');
+INSERT INTO `saleorder` VALUES (1,'2b7420c3-37e5-4ed3-a21c-58fbbd808372',84.37,2,'2023-03-17 17:20:24',_binary '\0'),(2,'b618b6ac-e17d-42f7-9a12-fd7f9c5b07f3',109.61,1,'2023-03-19 16:01:43',_binary '\0');
 /*!40000 ALTER TABLE `saleorder` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -192,7 +192,7 @@ CREATE TABLE `saleorderdetails` (
   KEY `product_id` (`product_id`),
   CONSTRAINT `saleorderdetails_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `saleorder` (`id`),
   CONSTRAINT `saleorderdetails_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -201,7 +201,7 @@ CREATE TABLE `saleorderdetails` (
 
 LOCK TABLES `saleorderdetails` WRITE;
 /*!40000 ALTER TABLE `saleorderdetails` DISABLE KEYS */;
-INSERT INTO `saleorderdetails` VALUES (1,'2b7420c3-37e5-4ed3-a21c-58fbbd808372',21.99,1,1,5,'2023-03-17 17:20:24'),(2,'2b7420c3-37e5-4ed3-a21c-58fbbd808372',25.39,1,1,6,'2023-03-17 17:20:24'),(3,'2b7420c3-37e5-4ed3-a21c-58fbbd808372',36.99,1,1,7,'2023-03-17 17:20:24');
+INSERT INTO `saleorderdetails` VALUES (1,'2b7420c3-37e5-4ed3-a21c-58fbbd808372',21.99,1,1,5,'2023-03-17 17:20:24'),(2,'2b7420c3-37e5-4ed3-a21c-58fbbd808372',25.39,1,1,6,'2023-03-17 17:20:24'),(3,'2b7420c3-37e5-4ed3-a21c-58fbbd808372',36.99,1,1,7,'2023-03-17 17:20:24'),(4,'b618b6ac-e17d-42f7-9a12-fd7f9c5b07f3',72.62,1,2,2,'2023-03-19 16:01:43'),(5,'b618b6ac-e17d-42f7-9a12-fd7f9c5b07f3',36.99,1,2,7,'2023-03-19 16:01:43');
 /*!40000 ALTER TABLE `saleorderdetails` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -224,12 +224,12 @@ CREATE TABLE `users` (
   `status` int NOT NULL,
   `username` varchar(255) NOT NULL,
   `role` varchar(10) DEFAULT NULL,
-  `account_number` varchar(20) DEFAULT NULL,
+  `account_number` varchar(200) DEFAULT NULL,
   `phone` varchar(10) DEFAULT NULL,
   `address` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UK_r43af9ap4edm43mmtq01oddj6` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -238,7 +238,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,NULL,NULL,NULL,NULL,'chu1@gmail.com','admin','$2a$10$lUrBPyGLZfSBKkqftycIJ.uw1t6EEM24QWsRt6ISfyHF/Pgf1lSzG',1,'admin','ADMIN','123456','123123123','Nguyễn Kiệm'),(2,NULL,NULL,'admin','2023-02-24 19:03:50','chuongcanthu@gmail.com','Nguyễn Văn AB','$2a$10$lUrBPyGLZfSBKkqftycIJ.uw1t6EEM24QWsRt6ISfyHF/Pgf1lSzG',1,'nguyenvana','USER','789987','0999999988','371 Nguyễn Kiệm, P3'),(3,NULL,NULL,NULL,NULL,'chu3@gmail.com','Hùng vip','$2a$10$lUrBPyGLZfSBKkqftycIJ.uw1t6EEM24QWsRt6ISfyHF/Pgf1lSzG',1,'hung11','USER','0123456465','123123123','Nguyễn Kiệm'),(4,NULL,NULL,NULL,NULL,'chu4@gmail.com','Hùng vip','$2a$10$lUrBPyGLZfSBKkqftycIJ.uw1t6EEM24QWsRt6ISfyHF/Pgf1lSzG',1,'hung12','USER','0123456465','123123123','Nguyễn Kiệm'),(5,NULL,NULL,NULL,NULL,NULL,'abc','$2a$10$HqD1QIQICEgI7uNmU53P..LQgvIR9jLB5cSewfvSZ9NWpgjC39W4m',1,'abc','USER',NULL,NULL,NULL);
+INSERT INTO `users` VALUES (1,NULL,NULL,NULL,NULL,'chu1@gmail.com','admin','$2a$10$bxkW0A7O040Poxp7uBaXIeh.XkCNwnTF6GUhWp2cuTtAeEdhiwZvS',1,'admin','ADMIN','123456','123123123','Nguyễn Kiệm'),(2,NULL,NULL,'admin','2023-02-24 19:03:50','chuongcanthu@gmail.com','Nguyễn Văn AB','$2a$10$bxkW0A7O040Poxp7uBaXIeh.XkCNwnTF6GUhWp2cuTtAeEdhiwZvS',1,'nguyenvana','USER','167-153-168-175-158-166-174-153','0999999988','371 Nguyễn Kiệm, P3, qGV'),(3,NULL,NULL,NULL,NULL,'chu3@gmail.com','Hùng vip','$2a$10$bxkW0A7O040Poxp7uBaXIeh.XkCNwnTF6GUhWp2cuTtAeEdhiwZvS',1,'hung11','USER','0123456465','123123123','Nguyễn Kiệm'),(4,NULL,NULL,NULL,NULL,'chu4@gmail.com','Hùng vip','$2a$10$bxkW0A7O040Poxp7uBaXIeh.XkCNwnTF6GUhWp2cuTtAeEdhiwZvS',1,'hung12','USER','0123456465','123123123','Nguyễn Kiệm'),(5,NULL,NULL,NULL,NULL,NULL,'abc','$2a$10$bxkW0A7O040Poxp7uBaXIeh.XkCNwnTF6GUhWp2cuTtAeEdhiwZvS',1,'abc','USER',NULL,NULL,NULL),(7,NULL,NULL,NULL,NULL,'chuongdinh2202@gmail.com','chuchu','$2a$10$izZrYYy8url1QxMQj/OWludngs9WcpDk9bfjF0lBmPZ3XUnCTDHrG',1,'chuchu','USER','147-159-173-156-159-173-156-159-173-156','0123456789','Nguyễn Kiệm');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -251,4 +251,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-03-18 18:39:15
+-- Dump completed on 2023-03-20 13:37:22
