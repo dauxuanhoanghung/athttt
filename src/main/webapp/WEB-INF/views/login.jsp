@@ -22,7 +22,7 @@
 			<div class="col align-items-center flex-col sign-up">
 				<div class="form-wrapper align-items-center">
 					<form class="form sign-up" action="/register" method="post"
-						onsubmit="submitForm(event)">
+						>
 						<%
 							if (request.getParameter("register") != null && !request.getParameter("register").isEmpty()) {
 						%>

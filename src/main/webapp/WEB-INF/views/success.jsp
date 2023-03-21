@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	    headers: {
 	      "Content-Type": "application/json",
 	    },
-	    body: JSON.stringify({ products: ids_product, userID: 1 }),
+	    body: JSON.stringify({ products: ids_product, userID: ${currentUser.id} }),
 	  })
 	    .then((res) => {
 	      if (res.status === 200) {
